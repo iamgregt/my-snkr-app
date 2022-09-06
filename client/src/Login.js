@@ -5,16 +5,31 @@ import {useState} from "react"
 function Login() {
 
     const [authMode, setAuthMode] = useState("signin")
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
 
 
     const changeAuthMode = () => {
       setAuthMode(authMode === "signin" ? "signup" : "signin")
     }
 
+    function onSubmit(e) {
+      e.preventDefault()
+      
+      const user = {
+        username,
+        password
+      }
+
+      
+    }
+
+
+
       if (authMode === "signin") {
         return (
           <div className="Auth-form-container">
-            <form className="Auth-form">
+            <form className="Auth-form" onSubmit={onSubmit}>
               <div className="Auth-form-content">
                 <h3 className="Auth-form-title">Sign In</h3>
                 <div className="text-center">
@@ -26,6 +41,8 @@ function Login() {
                 <div className="form-group mt-3">
                   <label>Username</label>
                   <input
+                   value={username}
+                   onChange={(e) => setUsername(e.target.value)}                
                     type="text"
                     className="form-control mt-1"
                     placeholder="Enter username"
@@ -34,6 +51,8 @@ function Login() {
                 <div className="form-group mt-3">
                   <label>Password</label>
                   <input
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
                     type="password"
                     className="form-control mt-1"
                     placeholder="Enter password"
