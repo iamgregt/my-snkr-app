@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :stores
   resources :shoes
   resources :users
   resources :sessions
