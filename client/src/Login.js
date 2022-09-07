@@ -13,7 +13,7 @@ function Login({onLogin, shoes}) {
       setAuthMode(authMode === "signin" ? "signup" : "signin")
     }
 
-    function onSubmit(e) {
+    function onSignUp(e) {
       e.preventDefault()
       
       const user = {
@@ -31,7 +31,7 @@ function Login({onLogin, shoes}) {
       .then(res => res.json()).then(data => console.log(data))
     }
 
-    function onLogin(e) {
+    function onSubmit(e) {
       e.preventDefault()
 
       const user = {
@@ -55,7 +55,7 @@ function Login({onLogin, shoes}) {
       if (authMode === "signin") {
         return (
           <div className="Auth-form-container">
-            <form className="Auth-form" onSubmit={onLogin}>
+            <form className="Auth-form" onSubmit={onSubmit}>
               <div className="Auth-form-content">
                 <h3 className="Auth-form-title">Sign In</h3>
                 <div className="text-center">
@@ -101,7 +101,7 @@ function Login({onLogin, shoes}) {
 
   return (
     <div className="Auth-form-container">
-      <form className="Auth-form" onSubmit={onSubmit}>
+      <form className="Auth-form" onSubmit={onSignUp}>
         <div className="Auth-form-content">
           <h3 className="Auth-form-title">Sign Up</h3>
           <div className="form-group mt-3">

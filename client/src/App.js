@@ -2,6 +2,7 @@ import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css"
 import Login from './Login';
 import { useEffect, useState } from 'react';
+import Closet from './Closet';
 
 function App() {
 
@@ -22,15 +23,22 @@ function App() {
     })
   }, [])
 
+  function handleLogOut(){
+    fetch('/logout', {
+      method: "DELETE"
+    }).then(() => setUser())
+  }
+
   if(user) {
     console.log(`Welcome back ${user.username}`)
   }
 
   return (
     <>
+    <button onClick={handleLogOut}>Logout?</button>
     {user ? <h2>Welcome back, {user.username}</h2> : null}
     {shoes ? <img src={shoes[0].image}/> : null}
-    <Login onLogin={setUser} shoes={shoes}/>
+    {!user ? <Login onLogin={setUser} shoes={shoes}/> : null}
 
     </>
   );
