@@ -6,6 +6,13 @@ import { useEffect, useState } from 'react';
 function App() {
 
   const [user, setUser] = useState(null)
+  const [shoes, setShoes] = useState(null)
+
+  useEffect(() => {
+    fetch("/shoes")
+    .then(r => r.json())
+    .then(shoes => setShoes(shoes))
+  }, [])
 
   useEffect(() => {
     fetch("/me").then((r) => {
@@ -23,6 +30,7 @@ function App() {
     <>
     {user ? <h2>Welcome back, {user.username}</h2> : null}
     <Login onLogin={setUser} />
+    {shoes ? <img src={shoes[0].image}/> : null}
     </>
   );
 }
