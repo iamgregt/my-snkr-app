@@ -2,7 +2,7 @@ import React, { useEffect } from "react"
 import {useState} from "react"
 
 
-function Login({onLogin}) {
+function Login({onLogin, shoes}) {
 
     const [authMode, setAuthMode] = useState("signin")
     const [username, setUsername] = useState('')

@@ -29,8 +29,9 @@ function App() {
   return (
     <>
     {user ? <h2>Welcome back, {user.username}</h2> : null}
-    <Login onLogin={setUser} />
     {shoes ? <img src={shoes[0].image}/> : null}
+    <Login onLogin={setUser} shoes={shoes}/>
+
     </>
   );
 }
