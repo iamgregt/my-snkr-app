@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :shoes
   resources :users
   resources :sessions
   # Routing logic: fallback requests for React Router.
