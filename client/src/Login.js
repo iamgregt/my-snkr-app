@@ -21,7 +21,36 @@ function Login() {
         password
       }
 
-      
+      fetch('/users', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(user)
+      })
+      .then(res => res.json()).then(data => console.log(data))
+    }
+
+    function onLogin(e) {
+      e.preventDefault()
+
+      const user = {
+        username,
+        password
+      }
+
+      fetch('/login', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(user)
+      })
+        .then(r => r.json()).then(data => console.log(data))
+
+        // console.log(user)
+
+    
     }
 
 
@@ -29,7 +58,7 @@ function Login() {
       if (authMode === "signin") {
         return (
           <div className="Auth-form-container">
-            <form className="Auth-form" onSubmit={onSubmit}>
+            <form className="Auth-form" onSubmit={onLogin}>
               <div className="Auth-form-content">
                 <h3 className="Auth-form-title">Sign In</h3>
                 <div className="text-center">
@@ -75,51 +104,27 @@ function Login() {
 
   return (
     <div className="Auth-form-container">
-      <form className="Auth-form">
+      <form className="Auth-form" onSubmit={onSubmit}>
         <div className="Auth-form-content">
           <h3 className="Auth-form-title">Sign Up</h3>
           <div className="form-group mt-3">
-            <label>First Name</label>
+            <label>Username</label>
             <input
+            onChange={e => setUsername(e.target.value)}
+            value={username}
             required
               type="text"
               className="form-control mt-1"
               placeholder="First Name"
             />
-               <label>Last Name</label>
+               <label>password</label>
             <input
-            required
-              type="text"
-              className="form-control mt-1"
-              placeholder="Last Name"
-            />
-          </div>
-          <div className="form-group mt-3">
-            <label>Username</label>
-            <input
-            required
-              type="text"
-              className="form-control mt-1"
-              placeholder="Enter username"
-            />
-          </div>
-          <div className="form-group mt-3">
-            <label>Password</label>
-            <input
+            value={password}
+            onChange={e => setPassword(e.target.value)}
             required
               type="password"
               className="form-control mt-1"
-              placeholder="Enter password"
-            />
-          </div>
-          <div className="form-group mt-3">
-            <label>Shoe Size</label>
-            <input
-              type="number"
-              min={4}
-              max={15}
-              className="form-control mt-1"
-              placeholder="Enter Shoe Size"
+              placeholder="password"
             />
           </div>
           <div className="d-grid gap-2 mt-3">
