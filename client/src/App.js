@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css"
 import Login from './Login';
@@ -22,6 +21,7 @@ function App() {
 
   return (
     <>
+    {user ? <h2>Welcome back, {user.username}</h2> : null}
     <Login onLogin={setUser} />
     </>
   );
