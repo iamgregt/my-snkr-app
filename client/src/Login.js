@@ -2,7 +2,7 @@ import React, { useEffect } from "react"
 import {useState} from "react"
 
 
-function Login() {
+function Login({onLogin}) {
 
     const [authMode, setAuthMode] = useState("signin")
     const [username, setUsername] = useState('')
@@ -46,10 +46,7 @@ function Login() {
         },
         body: JSON.stringify(user)
       })
-        .then(r => r.json()).then(data => console.log(data))
-
-        // console.log(user)
-
+        .then(r => r.json()).then(user => onLogin(user))
     
     }
 
