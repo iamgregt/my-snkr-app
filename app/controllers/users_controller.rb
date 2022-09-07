@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
     wrap_parameters format: []
 
+    def index
+        render json: User.all
+    end
+
     def create
         render json: User.create(user_params)
     end
