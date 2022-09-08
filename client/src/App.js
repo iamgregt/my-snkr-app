@@ -2,6 +2,7 @@ import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css"
 import Login from './Login';
 import { useEffect, useState } from 'react';
+import NewShoe from './NewShoe';
 
 function App() {
 
@@ -57,10 +58,7 @@ function App() {
     <>
     <button onClick={handleLogOut}>Logout?</button>
     <button onClick={handleTakeShoe}>Take Shoe?</button>
-    <form>
-      <label>Shoe size</label>
-      <input type="number"/>
-    </form>
+    <NewShoe user={user} />
     {user ? <h2>Welcome back, {user.username}.</h2> : null}
     {user ? <>{writeId(user)}</>: null}
     {user ? <img src={shoes[0].image}/> : null}
