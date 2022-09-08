@@ -3,6 +3,8 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import Login from './Login';
 import { useEffect, useState } from 'react';
 import NewShoe from './NewShoe';
+import Shopping from './Shopping';
+import Caro from './Caro';
 
 function App() {
 
@@ -56,7 +58,8 @@ function App() {
       <ul>
         {usr.shoes.map((shoe) => {
           return(
-            <li>{shoe.brand} in a size {shoe.size}</li>
+            <li>{shoe.brand} in a size {shoe.size}
+            <img src={shoe.image}/></li>
           )
         })}
       </ul>
@@ -66,12 +69,13 @@ function App() {
 
   return (
     <>
+    <Caro />
     <button onClick={handleLogOut}>Logout?</button>
     <button onClick={handleTakeShoe}>Take Shoe?</button>
     <NewShoe user={user} />
     {user ? <h2>Welcome back, {user.username}.</h2> : null}
     {user ? <>{writeId(user)}</>: null}
-    {user ? <img src={shoes[0].image}/> : null}
+    <Shopping />
     {!user ? <Login onLogin={setUser} shoes={shoes}/> : null}
 </>
   );
