@@ -50,7 +50,17 @@ function App() {
 
   function writeId(usr){
     return(
+      <>
       <h3>You're ID is {usr.id}</h3>
+      <h3>Here's your closet!</h3>
+      <ul>
+        {usr.shoes.map((shoe) => {
+          return(
+            <li>{shoe.brand} in a size {shoe.size}</li>
+          )
+        })}
+      </ul>
+      </>
     )
   }
 
