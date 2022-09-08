@@ -7,7 +7,7 @@ function Caro() {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="holder.js/800x400?text=First slide&bg=373940"
+          src="https://1000logos.net/wp-content/uploads/2020/10/Finish-Line-Logo-1976.png"
           alt="First slide"
         />
         <Carousel.Caption>
