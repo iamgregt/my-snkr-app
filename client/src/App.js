@@ -2,10 +2,6 @@ import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css"
 import Login from './Login';
 import { useEffect, useState } from 'react';
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 
 function App() {
 
@@ -51,6 +47,12 @@ function App() {
     console.log(`Welcome back ${user.username}`)
   }
 
+  function writeId(usr){
+    return(
+      <h3>You're ID is {usr.id}</h3>
+    )
+  }
+
   return (
     <>
     <button onClick={handleLogOut}>Logout?</button>
@@ -59,8 +61,9 @@ function App() {
       <label>Shoe size</label>
       <input type="number"/>
     </form>
-    {user ? <h2>Welcome back, {user.username}</h2> : null}
-    {shoes ? <img src={shoes[0].image}/> : null}
+    {user ? <h2>Welcome back, {user.username}.</h2> : null}
+    {user ? <>{writeId(user)}</>: null}
+    {user ? <img src={shoes[0].image}/> : null}
     {!user ? <Login onLogin={setUser} shoes={shoes}/> : null}
 </>
   );
