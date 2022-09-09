@@ -90,7 +90,6 @@ function App() {
     <NewShoe user={user} setImageList={setImageList} />
     {user ? <h2>Welcome back, {user.username}.</h2> : null}
     {user && user.shoes ? <>{writeId(user, user.shoes)}</>: null}
-    {user ? <img src={user.shoes[0].image}/> : null}
     {imageList ? imageList.map(url => <img src={url} /> ) : null}
     {!user ? <Login onLogin={setUser} shoes={shoes}/> : null}
 </>
