@@ -9,19 +9,31 @@ import Form from 'react-bootstrap/Form';
 
 function NewShoe({user, setImageList}){
     const [imageUpload, setImageUpload] = useState(null)
-            function newShoeForm() {
+    const [isJordan, setIsJordan] = useState(false)
+
+
+    function handleNewJordan(e){
+        e.target.value == "Jordan" ? setIsJordan(true) : setIsJordan(false)
+        
+    }
+    
+    
+    
+    function newShoeForm() {
             return(
                 <>
                 <h2>Got a new pair?</h2>
                 <h3>Go ahead and add them to your closet!</h3>
                 <Form>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Select aria-label="Default select example">
+                <Form.Select aria-label="Default select example" onChange={handleNewJordan}>
       <option>Select a brand</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
+      <option value="Jordan">Jordan</option>
+      <option value="Nike">Nike</option>
+      <option value="Puma">Puma</option>
+      <option value="Addidas">Addidas</option>
     </Form.Select>
+    {isJordan ? <><Form.Control type="number" placeholder="Which Release?" /></>: null}
                   <Form.Text className="text-muted">
                     Jordan, Nike, Puma, Addidas...whatcha got?!
                   </Form.Text>

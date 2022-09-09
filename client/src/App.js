@@ -6,12 +6,14 @@ import NewShoe from './NewShoe';
 import { ref, listAll, getDownloadURL } from 'firebase/storage';
 import { storage } from './firebase';
 import Shopping from './Shopping';
+import Button from 'react-bootstrap/esm/Button';
 
 function App() {
 
   const [user, setUser] = useState(null)
   const [shoes, setShoes] = useState(null)
   const [imageList, setImageList] = useState([])
+  const [addShoe, setAddShoe] = useState(false)
 
   const imageListRef = ref(storage, "SneakerImages/")
 
@@ -53,17 +55,18 @@ function App() {
   }
 
   function handleTakeShoe(){
+    setAddShoe(!addShoe)
     const newShoe = {
       user_id: 1
     }
 
-    fetch('/shoes/2', {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(newShoe)
-    }).then(r => r.json()).then(data => console.log(data))
+    // fetch('/shoes/2', {
+    //   method: "PATCH",
+    //   headers: {
+    //     "Content-Type": "application/json"
+    //   },
+    //   body: JSON.stringify(newShoe)
+    // }).then(r => r.json()).then(data => console.log(data))
   }
 
   if(user) {
@@ -88,9 +91,9 @@ function App() {
 
   return (
     <>
-    <button onClick={handleLogOut}>Logout?</button>
-    <button onClick={handleTakeShoe}>Take Shoe?</button>
-    <NewShoe user={user} setImageList={setImageList} />
+    <Button onClick={handleLogOut}>Logout?</Button>
+    <Button onClick={handleTakeShoe}>{addShoe ? <>Forget About It!</>: <>Add a pair?</>}</Button>
+    {addShoe ? <NewShoe user={user} setImageList={setImageList} /> : null}
     {user ? <h2>Welcome back, {user.username}.</h2> : null}
     {user && user.shoes ? <>{writeId(user, user.shoes)}</>: null}
     {imageList ? imageList.map(url => <img src={url} /> ) : null}
