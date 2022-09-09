@@ -32,6 +32,7 @@ function App() {
     getMetadata(picPath).then((metadata) => {
       console.log(metadata.customMetadata.user_id)
     }).catch((error) => console.log(error))
+    console.log(imageList)
   }
 
   useEffect(() => {
@@ -102,7 +103,7 @@ function App() {
 
   return (
     <>
-    <Button onClick={handleLogOut}>Logout?</Button>
+   {user ?  <Button onClick={handleLogOut}>Logout?</Button> : null}
     <Button onClick={handleTakeShoe}>{addShoe ? <>Forget About It!</>: <>Add a pair?</>}</Button>
     {addShoe ? <NewShoe user={user} setImageList={setImageList} /> : null}
     {user ? <h2>Welcome back, {user.username}.</h2> : null}
