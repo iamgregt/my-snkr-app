@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import NewShoe from './NewShoe';
 import { ref, listAll, getDownloadURL } from 'firebase/storage';
 import { storage } from './firebase';
+import Shopping from './Shopping';
 
 function App() {
 
@@ -13,6 +14,16 @@ function App() {
   const [imageList, setImageList] = useState([])
 
   const imageListRef = ref(storage, "SneakerImages/")
+
+
+  useEffect(() => {
+    fetch("/me").then((r) => {
+      if(r.ok) {
+        r.json().then((user) => setUser(user))
+        console.log('cool')
+      }
+    })
+  }, [])
 
   useEffect(() => {
     listAll(imageListRef)
@@ -27,14 +38,6 @@ function App() {
   }, [])
 
 
-  useEffect(() => {
-    fetch("/me").then((r) => {
-      if(r.ok) {
-        r.json().then((user) => setUser(user))
-        console.log('cool')
-      }
-    })
-  }, [])
 
   useEffect(() => {
     fetch("/shoes")
@@ -91,6 +94,7 @@ function App() {
     {user ? <h2>Welcome back, {user.username}.</h2> : null}
     {user && user.shoes ? <>{writeId(user, user.shoes)}</>: null}
     {imageList ? imageList.map(url => <img src={url} /> ) : null}
+    <Shopping />
     {!user ? <Login onLogin={setUser} shoes={shoes}/> : null}
 </>
   );
