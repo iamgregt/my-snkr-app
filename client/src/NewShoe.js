@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { storage } from "./firebase"
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
+import { getDownloadURL, ref, uploadBytes, updateMetadata } from "firebase/storage"
 import { uuidv4 } from "@firebase/util"
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -24,7 +24,7 @@ function NewShoe({user, setImageList}){
                 <>
                 <h2>Got a new pair?</h2>
                 <h3>Go ahead and add them to your closet!</h3>
-                <Form>
+                <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Select aria-label="Default select example" onChange={handleNewJordan}>
       <option>Select a brand</option>
@@ -40,11 +40,15 @@ function NewShoe({user, setImageList}){
                 </Form.Group>
           
                 <Form.Group className="mb-3" controlId="formBasicPassword">
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control type="password" placeholder="Password" />
+                  <Form.Label>What Size?</Form.Label>
+                  <Form.Control type="number" placeholder="enter shoe size" />
                 </Form.Group>
+                <Form.Group controlId="formFile" className="mb-3">
+        <Form.Label>Default file input example</Form.Label>
+        <Form.Control type="file" onChange={e => setImageUpload(e.target.files[0])} />
+      </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                  <Form.Check type="checkbox" label="Check me out" />
+                  <Form.Check type="checkbox" label="Want to resell?" />
                 </Form.Group>
                 <Button variant="primary" type="submit">
                   Submit
@@ -57,19 +61,40 @@ function NewShoe({user, setImageList}){
     function handleSubmit(e){
         e.preventDefault()
         console.log(e)
+        console.log(imageUpload)
 
+        
+        if(imageUpload) {
+        const metaData = 
+        { 
+            customMetadata : {"user_id": user.id}
+        }
+
+        
         const imageRef = ref(storage, `SneakerImages/${imageUpload.name + uuidv4()}`)
-        uploadBytes(imageRef, imageUpload).then((snapshot) => {
+         uploadBytes(imageRef, imageUpload).then((snapshot) => {
             alert("Image Uploaded")
             getDownloadURL(snapshot.ref).then((url) => {
                 setImageList((prev) => [...prev, url])
             })
         })
 
+        setTimeout(() => {
+            updateMetadata(imageRef, metaData)
+            .then((metadata) => {
+                console.log(metadata)
+            }).catch((error) => {
+                console.log(error)
+            })
+        }, 3000)
+
+    }
+
+
         const shoe = {
-            brand: e.target[0].value,
-            size: e.target[1].value,
-            user_id: 1
+            brand: `${e.target[0].value} ${e.target[1].value}`,
+            size: e.target[2].value,
+            user_id: user.id
         }
 
 
