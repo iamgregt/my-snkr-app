@@ -3,11 +3,30 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import Login from './Login';
 import { useEffect, useState } from 'react';
 import NewShoe from './NewShoe';
+import { ref, listAll, getDownloadURL } from 'firebase/storage';
+import { storage } from './firebase';
 
 function App() {
 
   const [user, setUser] = useState(null)
   const [shoes, setShoes] = useState(null)
+  const [imageList, setImageList] = useState([])
+
+  const imageListRef = ref(storage, "SneakerImages/")
+
+  useEffect(() => {
+    listAll(imageListRef)
+    .then(r => {
+      r.items.forEach((item) => {
+        console.log(item)
+        getDownloadURL(item).then((url) => {
+          setImageList((prev) => [...prev, url])
+        } )
+      })
+    })
+  }, [])
+
+
   useEffect(() => {
     fetch("/me").then((r) => {
       if(r.ok) {
@@ -68,10 +87,11 @@ function App() {
     <>
     <button onClick={handleLogOut}>Logout?</button>
     <button onClick={handleTakeShoe}>Take Shoe?</button>
-    <NewShoe user={user} />
+    <NewShoe user={user} setImageList={setImageList} />
     {user ? <h2>Welcome back, {user.username}.</h2> : null}
     {user && user.shoes ? <>{writeId(user, user.shoes)}</>: null}
     {user ? <img src={user.shoes[0].image}/> : null}
+    {imageList ? imageList.map(url => <img src={url} /> ) : null}
     {!user ? <Login onLogin={setUser} shoes={shoes}/> : null}
 </>
   );
