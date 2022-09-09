@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import Login from './Login';
 import { useEffect, useState } from 'react';
 import NewShoe from './NewShoe';
-import { ref, listAll, getDownloadURL } from 'firebase/storage';
+import { ref, listAll, getDownloadURL, getMetadata } from 'firebase/storage';
 import { storage } from './firebase';
 import Shopping from './Shopping';
 import Button from 'react-bootstrap/esm/Button';
@@ -27,16 +27,27 @@ function App() {
     })
   }, [])
 
+  function getTheData(pic){
+    const picPath = ref(storage, pic._location.path)
+    getMetadata(picPath).then((metadata) => {
+      console.log(metadata.customMetadata.user_id)
+    }).catch((error) => console.log(error))
+  }
+
   useEffect(() => {
     listAll(imageListRef)
     .then(r => {
       r.items.forEach((item) => {
         console.log(item)
+        console.log(item._location.path)
+        getTheData(item)
+       
         getDownloadURL(item).then((url) => {
           setImageList((prev) => [...prev, url])
         } )
       })
     })
+    
   }, [])
 
 
