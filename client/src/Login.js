@@ -1,11 +1,8 @@
 import React, { useEffect } from "react"
 import {useState} from "react"
-import {useNavigate} from "react-router-dom"
 
 
-function Login({onLogin}) {
-
-  let navigate = useNavigate()
+function Login({onLogin, shoes}) {
 
     const [authMode, setAuthMode] = useState("signin")
     const [username, setUsername] = useState('')
@@ -49,10 +46,7 @@ function Login({onLogin}) {
         },
         body: JSON.stringify(user)
       })
-        .then(r => r.json()).then((user) => {
-          onLogin(user)
-          navigate("/home", {replace: true})
-        })
+        .then(r => r.json()).then(user => onLogin(user))
     
     }
 
