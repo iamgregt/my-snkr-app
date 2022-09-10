@@ -1,4 +1,5 @@
-
+import {Tween, Power3} from 'gsap'
+import {useRef} from 'react'
 
 function Shopping(){
     return(

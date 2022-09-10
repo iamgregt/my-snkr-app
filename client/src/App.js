@@ -8,12 +8,15 @@ import { storage } from './firebase';
 import Shopping from './Shopping';
 import Button from 'react-bootstrap/esm/Button';
 
+
 function App() {
 
   const [user, setUser] = useState(null)
   const [shoes, setShoes] = useState(null)
   const [imageList, setImageList] = useState([])
   const [addShoe, setAddShoe] = useState(false)
+
+
 
   const imageListRef = ref(storage, "SneakerImages/")
 
@@ -105,12 +108,12 @@ function App() {
     <>
    {user ?  <Button onClick={handleLogOut}>Logout?</Button> : null}
     <Button onClick={handleTakeShoe}>{addShoe ? <>Forget About It!</>: <>Add a pair?</>}</Button>
+    {!user ? <Login onLogin={setUser} shoes={shoes}/> : null}
     {addShoe ? <NewShoe user={user} setImageList={setImageList} /> : null}
     {user ? <h2>Welcome back, {user.username}.</h2> : null}
     {user && user.shoes ? <>{writeId(user, user.shoes)}</>: null}
     {imageList ? imageList.map(url => <img src={url} /> ) : null}
     <Shopping />
-    {!user ? <Login onLogin={setUser} shoes={shoes}/> : null}
 </>
   );
 }
