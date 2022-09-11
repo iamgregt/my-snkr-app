@@ -85,15 +85,7 @@ function App() {
       user_id: 1
     }
 
-    function deleteShoe(){
-      fetch('/shoes/9', {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json"
-        }
-      }).then(r => console.log(r))
-      deleteObject()
-    }
+  
 
 
 
@@ -105,26 +97,65 @@ function App() {
     //   body: JSON.stringify(newShoe)
     // }).then(r => r.json()).then(data => console.log(data))
   }
+  function deleteShoe(e){
+    console.log(e)
+    const shoe = e.target.id
+    fetch(`/shoes/${shoe}`)
+    .then(r => r.json())
+    .then(s => {
+     const shoeRef = ref(storage, s.firebase)
+    deleteObject(shoeRef).then(() => {
+      console.log(shoe)
+    }).catch((error) => {
+  console.log(error)
+  setImageList(imageList.filter((i) => {
+    return i !== s.firebase
+  }))
+    });
+    })
 
+    fetch(`/shoes/${e.target.id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).then(r => console.log('removed from database'))
+
+
+  }
 
   if(user) {
     console.log(`Welcome back ${user.username}`)
   }
 
-  function writeId(usr, kicks, stuf){
+  function writeId(usr, kicks){
     return(
       <>
       <h3>You're ID is {usr.id}</h3>
       <h3>Here's your closet!</h3>
       <ul>
         {kicks.map((shoe) => {
-          return(
+          console.log(shoe)
+          return(<>
             <li>{shoe.brand} in a size {shoe.size}</li>
+            <img onClick={deleteShoe} id={shoe.id} src={shoe.firebase} />
+            </>
           )
         })}
       </ul>
+      {imageList ? imageList.map(url => <img src={url} /> ) : null}
+
       </>
     )
+  }
+
+  function handleListRemoval(e){
+    const shoe = e.target.currentSrc
+    setImageList((currentList) => {
+      currentList.filter((s) => {
+        return s !== shoe
+      })
+    })
   }
 
   return (
@@ -134,8 +165,24 @@ function App() {
     {!user ? <Login onLogin={setUser} shoes={shoes}/> : null}
     {addShoe ? <NewShoe user={user} setImageList={setImageList} setTestObj={setTestObj} testObj={testObj} /> : null}
     {user ? <h2>Welcome back, {user.username}.</h2> : null}
-    {user && user.shoes ? <>{writeId(user, user.shoes, shoes)}</>: null}
-    {imageList ? imageList.map(url => <img src={url} /> ) : null}
+    {/* {user && user.shoes ? <>{writeId(user, user.shoes)}</>: null} */}
+    {/* {imageList ? imageList.map(url => <img src={url} /> ) : null} */}
+    {user ? <>
+      <h3>You're ID is {user.id}</h3>
+      <h3>Here's your closet!</h3>
+      <ul>
+        {user.shoes.map((shoe) => {
+          console.log(shoe)
+          return(<>
+            <li>{shoe.brand} in a size {shoe.size}</li>
+            <img onClick={deleteShoe} id={shoe.id} src={shoe.firebase} />
+            </>
+          )
+        })}
+      </ul>
+      {imageList ? imageList.map(url => <img onClick={handleListRemoval} src={url} /> ) : null}
+
+      </> : null}
     <Shopping />
 </>
   );
