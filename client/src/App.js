@@ -1,7 +1,7 @@
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css"
 import Login from './Login';
-import { useEffect, useState } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import NewShoe from './NewShoe';
 import { ref, listAll, getDownloadURL, getMetadata, deleteObject } from 'firebase/storage';
 import { storage } from './firebase';
@@ -169,7 +169,7 @@ function App() {
     {/* {imageList ? imageList.map(url => <img src={url} /> ) : null} */}
     {user ? <>
       <h3>You're ID is {user.id}</h3>
-      <h3>Here's your closet!</h3>
+      <h3>{user.shoes[0] ? <>Here's Your Closet!</> : <>You don't have any shoes :/</>}</h3>
       <ul>
         {user.shoes.map((shoe) => {
           console.log(shoe)
