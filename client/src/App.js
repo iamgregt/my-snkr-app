@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import Login from './Login';
 import { useEffect, useState } from 'react';
 import NewShoe from './NewShoe';
-import { ref, listAll, getDownloadURL, getMetadata } from 'firebase/storage';
+import { ref, listAll, getDownloadURL, getMetadata, deleteObject } from 'firebase/storage';
 import { storage } from './firebase';
 import Shopping from './Shopping';
 import Button from 'react-bootstrap/esm/Button';
@@ -11,6 +11,10 @@ import Button from 'react-bootstrap/esm/Button';
 
 function App() {
 
+  const initialState = [
+    {url: 'test', path: 'test', name: 'test'}
+  ]
+  const [testObj, setTestObj] = useState(initialState)
   const [user, setUser] = useState(null)
   const [shoes, setShoes] = useState(null)
   const [imageList, setImageList] = useState([])
@@ -26,8 +30,15 @@ function App() {
       if(r.ok) {
         r.json().then((user) => setUser(user))
         console.log('cool')
+        console.log(testObj)
       }
     })
+  }, [])
+
+  useEffect(() => {
+    fetch("/shoes/")
+    .then(r => r.json())
+    .then(shoes => setShoes(shoes))
   }, [])
 
   function getTheData(pic){
@@ -36,6 +47,7 @@ function App() {
       console.log(metadata.customMetadata.user_id)
     }).catch((error) => console.log(error))
     console.log(imageList)
+    console.log(shoes)
   }
 
   useEffect(() => {
@@ -45,6 +57,8 @@ function App() {
         console.log(item)
         console.log(item._location.path)
         getTheData(item)
+        console.log(item.name)
+        console.log(testObj)
        
         getDownloadURL(item).then((url) => {
           setImageList((prev) => [...prev, url])
@@ -56,11 +70,7 @@ function App() {
 
 
 
-  useEffect(() => {
-    fetch("/shoes")
-    .then(r => r.json())
-    .then(shoes => setShoes(shoes))
-  }, [])
+
 
 
   function handleLogOut(){
@@ -75,6 +85,18 @@ function App() {
       user_id: 1
     }
 
+    function deleteShoe(){
+      fetch('/shoes/9', {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }).then(r => console.log(r))
+      deleteObject()
+    }
+
+
+
     // fetch('/shoes/2', {
     //   method: "PATCH",
     //   headers: {
@@ -84,11 +106,12 @@ function App() {
     // }).then(r => r.json()).then(data => console.log(data))
   }
 
+
   if(user) {
     console.log(`Welcome back ${user.username}`)
   }
 
-  function writeId(usr, kicks){
+  function writeId(usr, kicks, stuf){
     return(
       <>
       <h3>You're ID is {usr.id}</h3>
@@ -109,9 +132,9 @@ function App() {
    {user ?  <Button onClick={handleLogOut}>Logout?</Button> : null}
     <Button onClick={handleTakeShoe}>{addShoe ? <>Forget About It!</>: <>Add a pair?</>}</Button>
     {!user ? <Login onLogin={setUser} shoes={shoes}/> : null}
-    {addShoe ? <NewShoe user={user} setImageList={setImageList} /> : null}
+    {addShoe ? <NewShoe user={user} setImageList={setImageList} setTestObj={setTestObj} testObj={testObj} /> : null}
     {user ? <h2>Welcome back, {user.username}.</h2> : null}
-    {user && user.shoes ? <>{writeId(user, user.shoes)}</>: null}
+    {user && user.shoes ? <>{writeId(user, user.shoes, shoes)}</>: null}
     {imageList ? imageList.map(url => <img src={url} /> ) : null}
     <Shopping />
 </>

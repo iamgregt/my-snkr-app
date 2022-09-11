@@ -7,7 +7,7 @@ import Form from 'react-bootstrap/Form';
 
 
 
-function NewShoe({user, setImageList}){
+function NewShoe({user, setImageList, setTestObj}){
     const [imageUpload, setImageUpload] = useState(null)
     const [isJordan, setIsJordan] = useState(false)
 
@@ -73,9 +73,38 @@ function NewShoe({user, setImageList}){
         
         const imageRef = ref(storage, `SneakerImages/${imageUpload.name + uuidv4()}`)
          uploadBytes(imageRef, imageUpload).then((snapshot) => {
+          console.log(snapshot)
+
+          // const newObj = {
+          //   url: getDownloadURL(snapshot.ref).then(r => r),
+          //   path: snapshot.ref._location.path_,
+          //   name: snapshot.metadata.name
+          // }          // console.log(newObj)
+
+            // setTestObj(current => [...current, newObj ])
+
             alert("Image Uploaded")
             getDownloadURL(snapshot.ref).then((url) => {
                 setImageList((prev) => [...prev, url])
+                
+                
+                const shoe = {
+                  brand: `${e.target[0].value} ${e.target[1].value}`,
+                  size: isJordan ? e.target[2].value : e.target[1].value,
+                  user_id: user.id,
+                  image: snapshot.ref._location.path_,
+                  firebase: url
+                  
+              }
+
+                fetch('/shoes', {
+                  method: "POST",
+                  headers: {
+                      "Content-Type": "application/json"
+                  },
+                  body: JSON.stringify(shoe)
+              })
+              .then(r => r.json()).then(newShoe => console.log(newShoe))
             })
         })
 
@@ -91,43 +120,19 @@ function NewShoe({user, setImageList}){
     }
 
 
-        const shoe = {
-            brand: `${e.target[0].value} ${e.target[1].value}`,
-            size: e.target[2].value,
-            user_id: user.id
-        }
+
 
 
 
     
 
-        fetch('/shoes', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(shoe)
-        })
-        .then(r => r.json()).then(newShoe => console.log(newShoe))
+        
     }
 
 
     return(
         <>
         {newShoeForm()}
-        <form onSubmit={handleSubmit}>
-  <label>Brand</label>
-  <select>
-    <option value={1}>Jordan</option>
-    <option value={2}>Nike</option>
-    <option value={3}>Puma</option>
-    <option value={4}>Reebok</option>
-  </select>
-  <label>Size</label>
-  <input type="number"></input>
-  <input type="file" onChange={e => setImageUpload(e.target.files[0])} />
-  <input type="submit" value="Submit" />
-</form>
 </>
     )
 }
