@@ -25,3 +25,7 @@ User.create(
     password: "test",
     
 )
+
+Store.create(
+    name: "Finish Line"
+)
