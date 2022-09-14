@@ -1,7 +1,7 @@
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css"
 import Login from './Login';
-import { useEffect, useReducer, useState } from 'react';
+import { useEffect, useState } from 'react';
 import NewShoe from './NewShoe';
 import { ref, listAll, getDownloadURL, getMetadata, deleteObject } from 'firebase/storage';
 import { storage } from './firebase';
@@ -11,6 +11,8 @@ import Button from 'react-bootstrap/esm/Button';
 
 function App() {
 
+  const shoeContainer = document.getElementById('shoeContainer')
+
   const initialState = [
     {url: 'test', path: 'test', name: 'test'}
   ]
@@ -19,6 +21,7 @@ function App() {
   const [shoes, setShoes] = useState(null)
   const [imageList, setImageList] = useState([])
   const [addShoe, setAddShoe] = useState(false)
+  const [shoeList, setShoeList] = useState([])
 
 
 
@@ -69,10 +72,6 @@ function App() {
   }, [])
 
 
-
-
-
-
   function handleLogOut(){
     fetch('/logout', {
       method: "DELETE"
@@ -84,10 +83,6 @@ function App() {
     const newShoe = {
       user_id: 1
     }
-
-  
-
-
 
     // fetch('/shoes/2', {
     //   method: "PATCH",
@@ -128,11 +123,21 @@ function App() {
     console.log(`Welcome back ${user.username}`)
   }
 
+  function renderShoe(newShoe){
+    console.log(newShoe)
+    setShoeList((prevArr) => [...prevArr, newShoe])
+    const newImg = document.createElement('img')
+    newImg.src=newShoe.firebase
+    
+
+    shoeContainer.appendChild(newImg)
+    newImg.setAttribute('id', newShoe.id)
+    console.log('newImg added')
+  }
+
   function writeId(usr, kicks){
     return(
       <>
-      <h3>You're ID is {usr.id}</h3>
-      <h3>Here's your closet!</h3>
       <ul>
         {kicks.map((shoe) => {
           console.log(shoe)
@@ -150,6 +155,7 @@ function App() {
   }
 
   function handleListRemoval(e){
+    console.log(e)
     const shoe = e.target.currentSrc
     setImageList((currentList) => {
       currentList.filter((s) => {
@@ -160,30 +166,17 @@ function App() {
 
   return (
     <>
+    { shoeList.map(shoe => <img src={shoe.firebase} /> )}
    {user ?  <Button onClick={handleLogOut}>Logout?</Button> : null}
     <Button onClick={handleTakeShoe}>{addShoe ? <>Forget About It!</>: <>Add a pair?</>}</Button>
     {!user ? <Login onLogin={setUser} shoes={shoes}/> : null}
-    {addShoe ? <NewShoe user={user} setImageList={setImageList} setTestObj={setTestObj} testObj={testObj} /> : null}
-    {user ? <h2>Welcome back, {user.username}.</h2> : null}
+    {user ? <Shopping user={user} />: null }
+    {addShoe ? <NewShoe user={user} setImageList={setImageList} newShoe={shoeList} setShoeList={setShoeList} renderShoe={renderShoe} /> : null}
+    {/* {user ? <h2>Welcome back, {user.username}.</h2> : null} */}
     {/* {user && user.shoes ? <>{writeId(user, user.shoes)}</>: null} */}
     {/* {imageList ? imageList.map(url => <img src={url} /> ) : null} */}
-    {user ? <>
-      <h3>You're ID is {user.id}</h3>
-      <h3>{user.shoes[0] ? <>Here's Your Closet!</> : <>You don't have any shoes :/</>}</h3>
-      <ul>
-        {user.shoes.map((shoe) => {
-          console.log(shoe)
-          return(<>
-            <li>{shoe.brand} in a size {shoe.size}</li>
-            <img onClick={deleteShoe} id={shoe.id} src={shoe.firebase} />
-            </>
-          )
-        })}
-      </ul>
-      {imageList ? imageList.map(url => <img onClick={handleListRemoval} src={url} /> ) : null}
+    {imageList ? <div id='shoeContainer'> {imageList.map(url => <img onClick={deleteShoe} src={url} /> )} </div> : null}
 
-      </> : null}
-    <Shopping />
 </>
   );
 }

@@ -7,7 +7,7 @@ import Form from 'react-bootstrap/Form';
 
 
 
-function NewShoe({user, setImageList, setTestObj}){
+function NewShoe({user, setImageList, shoeList, setShoeList, renderShoe}){
     const [imageUpload, setImageUpload] = useState(null)
     const [isJordan, setIsJordan] = useState(false)
 
@@ -85,6 +85,7 @@ function NewShoe({user, setImageList, setTestObj}){
 
             alert("Image Uploaded")
             getDownloadURL(snapshot.ref).then((url) => {
+               
                 setImageList((prev) => [...prev, url])
                 
                 
@@ -97,6 +98,13 @@ function NewShoe({user, setImageList, setTestObj}){
                   
               }
 
+              // setShoeList((prev) => [...prev, shoe])
+              
+
+             
+
+              
+
                 fetch('/shoes', {
                   method: "POST",
                   headers: {
@@ -104,9 +112,17 @@ function NewShoe({user, setImageList, setTestObj}){
                   },
                   body: JSON.stringify(shoe)
               })
-              .then(r => r.json()).then(newShoe => console.log(newShoe))
+              .then(r => r.json()).then(newShoe => {
+                console.log(newShoe)
+                shoe.id = newShoe.id
+                renderShoe(shoe)
+              
+
+              })
             })
         })
+
+  
 
         setTimeout(() => {
             updateMetadata(imageRef, metaData)
