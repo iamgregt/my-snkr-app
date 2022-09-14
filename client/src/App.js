@@ -44,25 +44,24 @@ function App() {
     .then(shoes => setShoes(shoes))
   }, [])
 
+  useEffect(() => {
+    fetch("/shoes/")
+    .then(r => r.json())
+    .then(shoes => setShoeList(shoes))
+  }, [])
+
   function getTheData(pic){
     const picPath = ref(storage, pic._location.path)
     getMetadata(picPath).then((metadata) => {
       console.log(metadata.customMetadata.user_id)
     }).catch((error) => console.log(error))
-    console.log(imageList)
-    console.log(shoes)
   }
 
   useEffect(() => {
     listAll(imageListRef)
     .then(r => {
       r.items.forEach((item) => {
-        console.log(item)
-        console.log(item._location.path)
         getTheData(item)
-        console.log(item.name)
-        console.log(testObj)
-       
         getDownloadURL(item).then((url) => {
           setImageList((prev) => [...prev, url])
         } )
@@ -95,6 +94,13 @@ function App() {
   function deleteShoe(e){
     console.log(e)
     const shoe = e.target.id
+    const shoeImg = document.getElementById(shoe)
+    shoeImg.remove()
+
+    const newShoeList = shoeList.filter((i) => {
+      return i.id !== shoe
+    })
+    setShoeList(newShoeList)
     fetch(`/shoes/${shoe}`)
     .then(r => r.json())
     .then(s => {
@@ -103,6 +109,9 @@ function App() {
       console.log(shoe)
     }).catch((error) => {
   console.log(error)
+  // setShoeList(imageList.filter((i) => {
+  //   return i !== s.firebase
+  // }))
   setImageList(imageList.filter((i) => {
     return i !== s.firebase
   }))
@@ -115,8 +124,8 @@ function App() {
         "Content-Type": "application/json"
       }
     }).then(r => console.log('removed from database'))
-
-
+   
+    
   }
 
   if(user) {
@@ -126,33 +135,9 @@ function App() {
   function renderShoe(newShoe){
     console.log(newShoe)
     setShoeList((prevArr) => [...prevArr, newShoe])
-    const newImg = document.createElement('img')
-    newImg.src=newShoe.firebase
-    
-
-    shoeContainer.appendChild(newImg)
-    newImg.setAttribute('id', newShoe.id)
     console.log('newImg added')
   }
 
-  function writeId(usr, kicks){
-    return(
-      <>
-      <ul>
-        {kicks.map((shoe) => {
-          console.log(shoe)
-          return(<>
-            <li>{shoe.brand} in a size {shoe.size}</li>
-            <img onClick={deleteShoe} id={shoe.id} src={shoe.firebase} />
-            </>
-          )
-        })}
-      </ul>
-      {imageList ? imageList.map(url => <img src={url} /> ) : null}
-
-      </>
-    )
-  }
 
   function handleListRemoval(e){
     console.log(e)
@@ -166,7 +151,6 @@ function App() {
 
   return (
     <>
-    { shoeList.map(shoe => <img src={shoe.firebase} /> )}
    {user ?  <Button onClick={handleLogOut}>Logout?</Button> : null}
     <Button onClick={handleTakeShoe}>{addShoe ? <>Forget About It!</>: <>Add a pair?</>}</Button>
     {!user ? <Login onLogin={setUser} shoes={shoes}/> : null}
@@ -175,7 +159,8 @@ function App() {
     {/* {user ? <h2>Welcome back, {user.username}.</h2> : null} */}
     {/* {user && user.shoes ? <>{writeId(user, user.shoes)}</>: null} */}
     {/* {imageList ? imageList.map(url => <img src={url} /> ) : null} */}
-    {imageList ? <div id='shoeContainer'> {imageList.map(url => <img onClick={deleteShoe} src={url} /> )} </div> : null}
+    {/* {imageList ? <div id='shoeContainer'> {imageList.map(url => <img onClick={deleteShoe} src={url} /> )} </div> : null} */}
+    {shoeList ? <div id='shoeContainer'> {shoeList.map(shoe => <img onClick={deleteShoe} src={shoe.firebase} id={shoe.id} /> )} </div> : null}
 
 </>
   );
