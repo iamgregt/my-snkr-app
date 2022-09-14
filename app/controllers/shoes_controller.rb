@@ -34,7 +34,7 @@ class ShoesController < ApplicationController
     private
 
     def shoe_params
-        params.permit(:brand, :size, :image, :user_id, :firebase)
+        params.permit(:brand, :size, :image, :user_id, :firebase, :store_id)
     end
 end
 

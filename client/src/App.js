@@ -50,18 +50,18 @@ function App() {
     .then(shoes => setShoeList(shoes))
   }, [])
 
-  function getTheData(pic){
-    const picPath = ref(storage, pic._location.path)
-    getMetadata(picPath).then((metadata) => {
-      console.log(metadata.customMetadata.user_id)
-    }).catch((error) => console.log(error))
-  }
+  // function getTheData(pic){
+  //   const picPath = ref(storage, pic._location.path)
+  //   getMetadata(picPath).then((metadata) => {
+  //     console.log(metadata.customMetadata.user_id)
+  //   }).catch((error) => console.log(error))
+  // }
 
   useEffect(() => {
     listAll(imageListRef)
     .then(r => {
       r.items.forEach((item) => {
-        getTheData(item)
+        // getTheData(item)
         getDownloadURL(item).then((url) => {
           setImageList((prev) => [...prev, url])
         } )
@@ -159,7 +159,7 @@ function App() {
     {/* {user && user.shoes ? <>{writeId(user, user.shoes)}</>: null} */}
     {/* {imageList ? imageList.map(url => <img src={url} /> ) : null} */}
     {/* {imageList ? <div id='shoeContainer'> {imageList.map(url => <img onClick={deleteShoe} src={url} /> )} </div> : null} */}
-    {shoeList ? <div id='shoeContainer'> {shoeList.map(shoe => <img onClick={deleteShoe} src={shoe.firebase} id={shoe.id} /> )} </div> : null}
+    {/* {shoes ? <div id='shoeContainer'> {shoeList.map(shoe => <img onClick={deleteShoe} src={shoe.firebase} id={shoe.id} /> )} </div> : null} */}
 
 </>
   );
