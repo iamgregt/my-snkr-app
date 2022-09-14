@@ -97,10 +97,9 @@ function App() {
     const shoeImg = document.getElementById(shoe)
     shoeImg.remove()
 
-    const newShoeList = shoeList.filter((i) => {
+    setShoeList(shoeList.filter((i) => {
       return i.id !== shoe
-    })
-    setShoeList(newShoeList)
+    }))
     fetch(`/shoes/${shoe}`)
     .then(r => r.json())
     .then(s => {
