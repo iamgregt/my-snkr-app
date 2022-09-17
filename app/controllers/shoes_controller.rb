@@ -1,5 +1,7 @@
 class ShoesController < ApplicationController
 
+    wrap_parameters format: []
+
     def index
         render json: Shoe.all
     end

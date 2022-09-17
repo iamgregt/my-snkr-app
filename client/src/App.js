@@ -9,12 +9,12 @@ import Shopping from './Shopping';
 import Button from 'react-bootstrap/esm/Button';
 import Modal from 'react-bootstrap/Modal'
 import DonateShoe from './DonateShoe';
+import Shoe from './Shoe';
 
 
 
 function App() {
 
-  const shoeContainer = document.getElementById('shoeContainer')
 
   const [user, setUser] = useState(null)
   const [shoes, setShoes] = useState(null)
@@ -179,8 +179,9 @@ function App() {
     {/* {user && user.shoes ? <>{writeId(user, user.shoes)}</>: null} */}
     {/* {imageList ? imageList.map(url => <img src={url} /> ) : null} */}
     {/* {imageList ? <div id='shoeContainer'> {imageList.map(url => <img onClick={deleteShoe} src={url} /> )} </div> : null} */}
-    {shoes ? <div id='shoeContainer'> {shoeList.map(shoe => <img onClick={deleteShoe} src={shoe.firebase} id={shoe.id} /> )} </div> : null}
-    <Button variant="primary" onClick={handleShow}>
+    {/* {shoes ? <div id='shoeContainer'> {shoeList.map(shoe => <img onClick={deleteShoe} src={shoe.firebase} id={shoe.id} /> )} </div> : null} */}
+    {shoes ? <Shoe shoeList={shoeList} deleteShoe={deleteShoe} users={users} handleUpdate={handleUpdateShoeForm}/> : null}
+    {/* <Button variant="primary" onClick={handleShow}>
         Launch demo modal
       </Button>
     <Modal show={show} onHide={handleClose}>
@@ -198,11 +199,9 @@ function App() {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          {/* {update ? <>{renderUpdateForm()}</> : null} */}
-          {update ? <DonateShoe users={users} handleUpdate={handleUpdateShoeForm} /> : null }
         </Modal.Footer>
 
-      </Modal>
+      </Modal> */}
 
 </>
   );
