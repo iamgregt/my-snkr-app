@@ -10,6 +10,7 @@ import Button from 'react-bootstrap/esm/Button';
 import Modal from 'react-bootstrap/Modal'
 import DonateShoe from './DonateShoe';
 import Shoe from './Shoe';
+import { assert } from '@firebase/util';
 
 
 
@@ -41,7 +42,7 @@ function App() {
     fetch("/me").then((r) => {
       if(r.ok) {
         r.json().then((user) => setUser(user))
-        console.log('cool')      
+        console.log('cool')    
       }
     })
   }, [])

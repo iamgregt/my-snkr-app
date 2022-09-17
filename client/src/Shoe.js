@@ -4,6 +4,8 @@ import Modal from 'react-bootstrap/Modal'
 import DonateShoe from "./DonateShoe";
 import Card from 'react-bootstrap/Card'
 import ListGroup from 'react-bootstrap/ListGroup'
+import myJson from './assets/shoeDescriptions.json'
+
 
 
 function Shoe({shoeList, deleteShoe, users}) {
@@ -26,6 +28,10 @@ function Shoe({shoeList, deleteShoe, users}) {
         <div id='shoeContainer'>
            
         {shoeList ? shoeList.map((s) => {
+            let shoeDescription = ""
+            const shoeJson = myJson.find(d => d.name == s.brand)
+            shoeJson ? shoeDescription = shoeJson.description : shoeDescription = "no desc"
+
             return(
         <div>
          <Card style={{ width: '18rem' }}>
@@ -39,7 +45,7 @@ function Shoe({shoeList, deleteShoe, users}) {
       </Card.Body>
       <ListGroup className="list-group-flush">
         <ListGroup.Item>Shoe Size: {s.size}</ListGroup.Item>
-        <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
+        <ListGroup.Item>{shoeDescription}</ListGroup.Item>
         <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
       </ListGroup>
       <Card.Body>
