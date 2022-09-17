@@ -27,6 +27,6 @@ User.create(
     
 )
 
-# Store.create(
-#     name: "Finish Line"
-# )
+Store.create(
+    name: "Finish Line"
+)

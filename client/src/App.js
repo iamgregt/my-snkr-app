@@ -13,36 +13,42 @@ function App() {
 
   const shoeContainer = document.getElementById('shoeContainer')
 
-  const initialState = [
-    {url: 'test', path: 'test', name: 'test'}
-  ]
-  const [testObj, setTestObj] = useState(initialState)
   const [user, setUser] = useState(null)
   const [shoes, setShoes] = useState(null)
   const [imageList, setImageList] = useState([])
   const [addShoe, setAddShoe] = useState(false)
   const [shoeList, setShoeList] = useState([])
+  const [stores, setStores] = useState([])
 
 
 
   const imageListRef = ref(storage, "SneakerImages/")
-
+ 
 
   useEffect(() => {
     fetch("/me").then((r) => {
       if(r.ok) {
         r.json().then((user) => setUser(user))
-        console.log('cool')
-        console.log(testObj)
+        console.log('cool')      
       }
     })
   }, [])
-
+  
+  
   useEffect(() => {
     fetch("/shoes/")
     .then(r => r.json())
     .then(shoes => setShoes(shoes))
   }, [])
+  
+  
+  useEffect(() => {
+    fetch('/stores')
+    .then(r => r.json())
+    .then(s => setStores(s))
+  }, [])
+
+
 
   useEffect(() => {
     fetch("/shoes/")
@@ -153,13 +159,13 @@ function App() {
    {user ?  <Button onClick={handleLogOut}>Logout?</Button> : null}
     <Button onClick={handleTakeShoe}>{addShoe ? <>Forget About It!</>: <>Add a pair?</>}</Button>
     {!user ? <Login onLogin={setUser} shoes={shoes}/> : null}
-    {user ? <Shopping user={user} />: null }
+    {user ? <Shopping user={user} stores={stores} setStores={setStores} />: null }
     {addShoe ? <NewShoe user={user} setImageList={setImageList} newShoe={shoeList} setShoeList={setShoeList} renderShoe={renderShoe} /> : null}
     {/* {user ? <h2>Welcome back, {user.username}.</h2> : null} */}
     {/* {user && user.shoes ? <>{writeId(user, user.shoes)}</>: null} */}
     {/* {imageList ? imageList.map(url => <img src={url} /> ) : null} */}
     {/* {imageList ? <div id='shoeContainer'> {imageList.map(url => <img onClick={deleteShoe} src={url} /> )} </div> : null} */}
-    {/* {shoes ? <div id='shoeContainer'> {shoeList.map(shoe => <img onClick={deleteShoe} src={shoe.firebase} id={shoe.id} /> )} </div> : null} */}
+    {shoes ? <div id='shoeContainer'> {shoeList.map(shoe => <img onClick={deleteShoe} src={shoe.firebase} id={shoe.id} /> )} </div> : null}
 
 </>
   );

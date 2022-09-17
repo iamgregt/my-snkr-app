@@ -113,8 +113,8 @@ function NewShoe({user, setImageList, shoeList, setShoeList, renderShoe}){
                   body: JSON.stringify(shoe)
               })
               .then(r => r.json()).then(newShoe => {
-                console.log(newShoe)
                 shoe.id = newShoe.id
+                console.log(newShoe)
                 renderShoe(shoe)
               
 

@@ -1,7 +1,9 @@
 import {Tween, Power3} from 'gsap'
-import {useRef} from 'react'
+import {useEffect, useRef} from 'react'
 
-function Shopping({user}){
+function Shopping({user, stores, setStores}){
+
+    
 
 
     return(
