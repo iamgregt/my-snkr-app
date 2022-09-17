@@ -35,7 +35,7 @@ function App() {
 
 
   const imageListRef = ref(storage, "SneakerImages/")
- 
+  const shoeDescriptions = ref(storage, "ShoeDescriptions/")
 
   useEffect(() => {
     fetch("/me").then((r) => {
