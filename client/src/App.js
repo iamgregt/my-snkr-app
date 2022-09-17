@@ -7,6 +7,9 @@ import { ref, listAll, getDownloadURL, getMetadata, deleteObject } from 'firebas
 import { storage } from './firebase';
 import Shopping from './Shopping';
 import Button from 'react-bootstrap/esm/Button';
+import Modal from 'react-bootstrap/Modal'
+import DonateShoe from './DonateShoe';
+
 
 
 function App() {
@@ -20,6 +23,15 @@ function App() {
   const [shoeList, setShoeList] = useState([])
   const [stores, setStores] = useState([])
 
+  const [users, setUsers] = useState([])
+
+  const [show, setShow] = useState(false);
+  const [update, setUpdate] = useState(false)
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const handleUpdate = () => setUpdate(true)
+
 
 
   const imageListRef = ref(storage, "SneakerImages/")
@@ -32,6 +44,12 @@ function App() {
         console.log('cool')      
       }
     })
+  }, [])
+
+  useEffect(() => {
+    fetch('/users')
+    .then(r => r.json())
+    .then(data => setUsers(data))  
   }, [])
   
   
@@ -143,16 +161,12 @@ function App() {
     console.log('newImg added')
   }
 
-
-  function handleListRemoval(e){
+  function handleUpdateShoeForm(e){
+    e.preventDefault(e)
     console.log(e)
-    const shoe = e.target.currentSrc
-    setImageList((currentList) => {
-      currentList.filter((s) => {
-        return s !== shoe
-      })
-    })
   }
+
+
 
   return (
     <>
@@ -166,6 +180,29 @@ function App() {
     {/* {imageList ? imageList.map(url => <img src={url} /> ) : null} */}
     {/* {imageList ? <div id='shoeContainer'> {imageList.map(url => <img onClick={deleteShoe} src={url} /> )} </div> : null} */}
     {shoes ? <div id='shoeContainer'> {shoeList.map(shoe => <img onClick={deleteShoe} src={shoe.firebase} id={shoe.id} /> )} </div> : null}
+    <Button variant="primary" onClick={handleShow}>
+        Launch demo modal
+      </Button>
+    <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>What do you want to do?</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={handleUpdate}>
+            Update Shoe
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Remove Shoe
+          </Button>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          {/* {update ? <>{renderUpdateForm()}</> : null} */}
+          {update ? <DonateShoe users={users} handleUpdate={handleUpdateShoeForm} /> : null }
+        </Modal.Footer>
+
+      </Modal>
 
 </>
   );
