@@ -28,9 +28,9 @@ function NewShoe({user, setImageList, shoeList, setShoeList, renderShoe}){
                 <Form.Group className="mb-3">
                   <Form.Select aria-label="Default select example" onChange={handleNewJordan}>
       <option>Select a Store</option>
-      <option value="Finish Line">Finish Line</option>
-      <option value="Hibett Sports">Hibett Sports</option>
-      <option value="Footlocker">Footlocker</option>
+      <option value="1">Finish Line</option>
+      <option value="2">Hibett Sports</option>
+      <option value="3">Footlocker</option>
     </Form.Select>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -65,6 +65,8 @@ function NewShoe({user, setImageList, shoeList, setShoeList, renderShoe}){
               </>
             )
         }
+    
+
 
     function handleSubmit(e){
         e.preventDefault()
@@ -83,14 +85,6 @@ function NewShoe({user, setImageList, shoeList, setShoeList, renderShoe}){
          uploadBytes(imageRef, imageUpload).then((snapshot) => {
           console.log(snapshot)
 
-          // const newObj = {
-          //   url: getDownloadURL(snapshot.ref).then(r => r),
-          //   path: snapshot.ref._location.path_,
-          //   name: snapshot.metadata.name
-          // }          // console.log(newObj)
-
-            // setTestObj(current => [...current, newObj ])
-
             alert("Image Uploaded")
             getDownloadURL(snapshot.ref).then((url) => {
                
@@ -98,21 +92,14 @@ function NewShoe({user, setImageList, shoeList, setShoeList, renderShoe}){
                 
                 
                 const shoe = {
-                  brand: `${e.target[0].value} ${e.target[1].value}`,
-                  size: isJordan ? e.target[2].value : e.target[1].value,
+                  store_id: e.target[0].value,
+                  brand: `${e.target[1].value} ${e.target[2].value}`,
+                  size: isJordan ? e.target[3].value : e.target[2].value,
                   user_id: user.id,
                   image: snapshot.ref._location.path_,
-                  firebase: url,
-                  store_id: 1
-                  
+                  firebase: url
               }
-
-              // setShoeList((prev) => [...prev, shoe])
-              
-
-             
-
-              
+    
 
                 fetch('/shoes', {
                   method: "POST",
@@ -143,14 +130,6 @@ function NewShoe({user, setImageList, shoeList, setShoeList, renderShoe}){
         }, 3000)
 
     }
-
-
-
-
-
-
-    
-
         
     }
 
