@@ -8,7 +8,7 @@ function Shopping({user, stores, setStores}){
 
     return(
         <div className="card">
-  <img className="card-img-top" src="https://1000logos.net/wp-content/uploads/2020/10/Finish-Line-Logo-1976.png" alt="Card image cap" />
+  {/* <img className="card-img-top" src="https://1000logos.net/wp-content/uploads/2020/10/Finish-Line-Logo-1976.png" alt="Card image cap" /> */}
   <div className="card-body"><div>
     <h2>Welcome back, {user.username}! </h2>
     </div>

@@ -25,6 +25,14 @@ function NewShoe({user, setImageList, shoeList, setShoeList, renderShoe}){
                 <h2>Got a new pair?</h2>
                 <h3>Go ahead and add them to your closet!</h3>
                 <Form onSubmit={handleSubmit}>
+                <Form.Group className="mb-3">
+                  <Form.Select aria-label="Default select example" onChange={handleNewJordan}>
+      <option>Select a Store</option>
+      <option value="Finish Line">Finish Line</option>
+      <option value="Hibett Sports">Hibett Sports</option>
+      <option value="Footlocker">Footlocker</option>
+    </Form.Select>
+                </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Select aria-label="Default select example" onChange={handleNewJordan}>
       <option>Select a brand</option>
