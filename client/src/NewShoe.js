@@ -94,7 +94,8 @@ function NewShoe({user, setImageList, shoeList, setShoeList, renderShoe}){
                   size: isJordan ? e.target[2].value : e.target[1].value,
                   user_id: user.id,
                   image: snapshot.ref._location.path_,
-                  firebase: url
+                  firebase: url,
+                  store_id: 1
                   
               }
 
