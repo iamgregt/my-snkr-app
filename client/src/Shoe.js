@@ -16,6 +16,11 @@ function Shoe({shoeList, deleteShoe, users}) {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const handleUpdate = () => setUpdate(true)
+    const handleRemove = (e) => {
+        setShow(false)
+        deleteShoe(e)
+
+    }
 
     const [show, setShow] = useState(false);
     const [update, setUpdate] = useState(false)
@@ -54,13 +59,12 @@ function Shoe({shoeList, deleteShoe, users}) {
         <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
       </ListGroup>
       <Card.Body>
-        <Card.Link href="#" onClick={handleShow}>Donate Shoe</Card.Link>
-        <Card.Link href="#">Delete Shoe</Card.Link>
+      <Button size="lg" variant="primary" onClick={handleShow}>
+        Shoe Management
+      </Button>
       </Card.Body>
     </Card>
-        <Button variant="primary" onClick={handleShow}>
-        Launch demo modal
-      </Button>
+      
     <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>What do you want to do?</Modal.Title>
@@ -70,7 +74,7 @@ function Shoe({shoeList, deleteShoe, users}) {
           <Button size="lg" variant="primary" onClick={handleUpdate}>
             Update Shoe
           </Button>
-          <Button data-shoeID={s.id} size="lg" variant="danger" onClick={deleteShoe}>
+          <Button data-shoeid={s.id} size="lg" variant="danger" onClick={handleRemove}>
             Remove Shoe
           </Button>
           <Button size="lg" variant="secondary" onClick={handleClose}>

@@ -174,39 +174,10 @@ function App() {
   return (
     <>
     <Navi handleLogOut={handleLogOut} user={user} />
-   {user ?  <Button onClick={handleLogOut}>Logout?</Button> : null}
-    <Button onClick={handleTakeShoe}>{addShoe ? <>Forget About It!</>: <>Add a pair?</>}</Button>
+    <Button size='lg ' onClick={handleTakeShoe}>{addShoe ? <>Forget About It!</>: <>Add a pair?</>}</Button>
     {!user ? <Login onLogin={setUser} shoes={shoes}/> : null}
-    {/* {user ? <Shopping user={user} stores={stores} setStores={setStores} />: null } */}
     {addShoe ? <NewShoe user={user} setImageList={setImageList} newShoe={shoeList} setShoeList={setShoeList} renderShoe={renderShoe} /> : null}
-    {/* {user ? <h2>Welcome back, {user.username}.</h2> : null} */}
-    {/* {user && user.shoes ? <>{writeId(user, user.shoes)}</>: null} */}
-    {/* {imageList ? imageList.map(url => <img src={url} /> ) : null} */}
-    {/* {imageList ? <div id='shoeContainer'> {imageList.map(url => <img onClick={deleteShoe} src={url} /> )} </div> : null} */}
-    {/* {shoes ? <div id='shoeContainer'> {shoeList.map(shoe => <img onClick={deleteShoe} src={shoe.firebase} id={shoe.id} /> )} </div> : null} */}
     {shoes ? <Shoe shoeList={shoeList} deleteShoe={deleteShoe} users={users} handleUpdate={handleUpdateShoeForm}/> : null}
-    {/* <Button variant="primary" onClick={handleShow}>
-        Launch demo modal
-      </Button>
-    <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>What do you want to do?</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={handleUpdate}>
-            Update Shoe
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Remove Shoe
-          </Button>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-        </Modal.Footer>
-
-      </Modal> */}
-
 </>
   );
 }

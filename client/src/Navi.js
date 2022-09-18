@@ -4,20 +4,21 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Button from 'react-bootstrap/esm/Button';
 
-function Navi({handleLogout, user}) {
+function Navi({handleLogOut, user}) {
 
   function renderButton(){
 
     const buttonVariant = user ? "outline-danger" : "outline-success"
+    const clickAction = user ? handleLogOut : null
 
     return(
-      <Button variant={buttonVariant}>{user ? <>Logout</> : <>Login</>}</Button>
+      <Button onClick={clickAction} variant={buttonVariant}>{user ? <>Logout</> : <>Login</>}</Button>
     )
   }
 
 
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar style={{paddingBottom: '5rem'}} bg="light" expand="lg">
       <Container>
         <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -37,7 +38,7 @@ function Navi({handleLogout, user}) {
               </NavDropdown.Item>
             </NavDropdown>
           <Navbar.Text style={{textAlign: 'right'}}>
-            Signed in as: <a href="#login">{user ? user.username : <>Please Sign In</>}</a>
+            Signed in as: <a href="/login">{user ? user.username : <>Please Sign In</>}</a>
           </Navbar.Text>
           </Nav>
         </Navbar.Collapse>
