@@ -83,18 +83,18 @@ function App() {
   //   }).catch((error) => console.log(error))
   // }
 
-  useEffect(() => {
-    listAll(imageListRef)
-    .then(r => {
-      r.items.forEach((item) => {
-        // getTheData(item)
-        getDownloadURL(item).then((url) => {
-          setImageList((prev) => [...prev, url])
-        } )
-      })
-    })
+  // useEffect(() => {
+  //   listAll(imageListRef)
+  //   .then(r => {
+  //     r.items.forEach((item) => {
+  //       // getTheData(item)
+  //       getDownloadURL(item).then((url) => {
+  //         setImageList((prev) => [...prev, url])
+  //       } )
+  //     })
+  //   })
     
-  }, [])
+  // }, [])
 
 
   function handleLogOut(){
@@ -103,6 +103,10 @@ function App() {
     }).then(() => setUser())
   }
 
+  function clearImageState(){
+    setImageList([])
+    setShoeList([])
+  }
 
   function deleteShoe(e){
     console.log(e)
@@ -161,10 +165,10 @@ function App() {
   return (
     <>
     <Navi handleLogOut={handleLogOut} user={user} />
-    <Button size='lg ' onClick={() => setAddShoe(!addShoe)}>{addShoe ? <>Forget About It!</>: <>Add a pair?</>}</Button>
+    {user ? <Button variant='dark' style={{marginTop: '3rem', marginBottom: '3rem'}} size='lg ' onClick={() => setAddShoe(!addShoe)}>{addShoe ? <>Forget About It!</>: <>Add a pair?</>}</Button> :null}
     {!user ? <Login onLogin={setUser} shoes={shoes}/> : null}
     {addShoe ? <NewShoe user={user} setImageList={setImageList} newShoe={shoeList} setShoeList={setShoeList} renderShoe={renderShoe} addShoe={addShoe} setAddShoe={setAddShoe} /> : null}
-    {shoes ? <Shoe shoeList={shoeList} deleteShoe={deleteShoe} users={users} handleUpdate={handleUpdateShoeForm}/> : null}
+    {shoes ? <Shoe shoes= {shoes} setShoeList={setShoeList} clearImageState={clearImageState} shoeList={shoeList} deleteShoe={deleteShoe} users={users} handleUpdate={handleUpdateShoeForm} user={user} /> : null}
 </>
   );
 }

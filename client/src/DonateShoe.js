@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/esm/Button';
 
 
 
-function DonateShoe({users, shoe}){
+function DonateShoe({users, shoe, user, update, setUpdate, clearImageState, setShoeList, shoeList, shoes}){
 
     function handleUpdate(e){
         e.preventDefault()
@@ -23,7 +23,12 @@ function DonateShoe({users, shoe}){
             body: JSON.stringify(updatedShoe)
         })
         .then(r => r.json())
-        .then(data => console.log(data))
+        .then(data => {
+            console.log(data)
+            setUpdate(!update)
+            clearImageState()
+            setShoeList(shoes)
+        })
     }
     
 
@@ -34,9 +39,12 @@ function DonateShoe({users, shoe}){
                       <Form.Select aria-label="Default select example">
           <option>Choose a user</option>
 
-          {users.map((u) => <option value={u.id}>{u.username}</option>)}
+          {users.filter((usr => usr.id !== user.id)).map((u) => <option value={u.id}>{u.username}</option>)}
         </Form.Select>
                     </Form.Group>
+                    <Button variant="secondary" onClick={() => setUpdate(!update)}>
+                      Close
+                    </Button>
                     <Button variant="primary" type="submit">
                       Submit
                     </Button>

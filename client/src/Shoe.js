@@ -9,7 +9,7 @@ import CardGroup from 'react-bootstrap/CardGroup'
 
 
 
-function Shoe({shoeList, deleteShoe, users}) {
+function Shoe({shoeList, deleteShoe, users, user, clearImageState, setShoeList, shoes}) {
 
 
 
@@ -30,14 +30,15 @@ function Shoe({shoeList, deleteShoe, users}) {
         console.log(e)
       }
 
-
-  
+        console.log(shoeList)
+        console.log(user)
 
     return (
         <div id='shoeContainer'>
             <CardGroup>
            
-        {shoeList ? shoeList.map((s) => {
+        {shoeList && user ? shoeList.filter(kick => kick.user.id === user.id).map((s) => {
+            console.log(s)
             let shoeDescription = ""
             const shoeJson = myJson.find(d => d.name == s.brand)
             shoeJson ? shoeDescription = shoeJson.description : shoeDescription = "no desc"
@@ -76,12 +77,12 @@ function Shoe({shoeList, deleteShoe, users}) {
             Close
           </Button>
         </Modal.Footer>
-        {update ? <DonateShoe shoe={s} users={users} /> : null}
+        {update ? <DonateShoe shoes={shoes} shoeList={shoeList} setShoeList={setShoeList} clearImageState={clearImageState} shoe={s} users={users} user={user} update={update} setUpdate={setUpdate} /> : null}
       </Modal>
       
       </div>
         )
-        }): null}
+        }): console.log(shoeList)}
         </CardGroup>
         </div>
 
