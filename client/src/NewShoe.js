@@ -7,7 +7,7 @@ import Form from 'react-bootstrap/Form';
 
 
 
-function NewShoe({user, setImageList, shoeList, setShoeList, renderShoe}){
+function NewShoe({user, setImageList, renderShoe, addShoe, setAddShoe}){
     const [imageUpload, setImageUpload] = useState(null)
     const [isJordan, setIsJordan] = useState(false)
 
@@ -112,6 +112,7 @@ function NewShoe({user, setImageList, shoeList, setShoeList, renderShoe}){
                 shoe.id = newShoe.id
                 console.log(newShoe)
                 renderShoe(shoe)
+                setAddShoe(!addShoe)
               
 
               })

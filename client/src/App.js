@@ -103,20 +103,7 @@ function App() {
     }).then(() => setUser())
   }
 
-  function handleTakeShoe(){
-    setAddShoe(!addShoe)
-    const newShoe = {
-      user_id: 1
-    }
 
-    // fetch('/shoes/2', {
-    //   method: "PATCH",
-    //   headers: {
-    //     "Content-Type": "application/json"
-    //   },
-    //   body: JSON.stringify(newShoe)
-    // }).then(r => r.json()).then(data => console.log(data))
-  }
   function deleteShoe(e){
     console.log(e)
     const shoe = e.target.dataset.shoeid
@@ -174,9 +161,9 @@ function App() {
   return (
     <>
     <Navi handleLogOut={handleLogOut} user={user} />
-    <Button size='lg ' onClick={handleTakeShoe}>{addShoe ? <>Forget About It!</>: <>Add a pair?</>}</Button>
+    <Button size='lg ' onClick={() => setAddShoe(!addShoe)}>{addShoe ? <>Forget About It!</>: <>Add a pair?</>}</Button>
     {!user ? <Login onLogin={setUser} shoes={shoes}/> : null}
-    {addShoe ? <NewShoe user={user} setImageList={setImageList} newShoe={shoeList} setShoeList={setShoeList} renderShoe={renderShoe} /> : null}
+    {addShoe ? <NewShoe user={user} setImageList={setImageList} newShoe={shoeList} setShoeList={setShoeList} renderShoe={renderShoe} addShoe={addShoe} setAddShoe={setAddShoe} /> : null}
     {shoes ? <Shoe shoeList={shoeList} deleteShoe={deleteShoe} users={users} handleUpdate={handleUpdateShoeForm}/> : null}
 </>
   );

@@ -1,5 +1,6 @@
 import React, { useEffect } from "react"
 import {useState} from "react"
+import {useNavigate} from "react-router-dom"
 
 
 function Login({onLogin, shoes}) {
@@ -7,14 +8,27 @@ function Login({onLogin, shoes}) {
     const [authMode, setAuthMode] = useState("signin")
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    
+    const navigate = useNavigate()
+
 
 
     const changeAuthMode = () => {
       setAuthMode(authMode === "signin" ? "signup" : "signin")
     }
 
+    function clearState(){
+      setUsername('')
+      setPassword('')
+      navigate('/')
+      changeAuthMode()
+    }
+
     function onSignUp(e) {
       e.preventDefault()
+
+      
+
       
       const user = {
         username,
@@ -28,7 +42,10 @@ function Login({onLogin, shoes}) {
         },
         body: JSON.stringify(user)
       })
-      .then(res => res.json()).then(data => console.log(data))
+      .then(res => res.json()).then(data => {
+        console.log(data)
+        clearState()
+      })
     }
 
     function onSubmit(e) {
