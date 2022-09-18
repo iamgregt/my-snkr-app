@@ -11,6 +11,7 @@ import Modal from 'react-bootstrap/Modal'
 import DonateShoe from './DonateShoe';
 import Shoe from './Shoe';
 import { assert } from '@firebase/util';
+import Navi from './Navi';
 
 
 
@@ -172,10 +173,11 @@ function App() {
 
   return (
     <>
+    <Navi handleLogOut={handleLogOut} user={user} />
    {user ?  <Button onClick={handleLogOut}>Logout?</Button> : null}
     <Button onClick={handleTakeShoe}>{addShoe ? <>Forget About It!</>: <>Add a pair?</>}</Button>
     {!user ? <Login onLogin={setUser} shoes={shoes}/> : null}
-    {user ? <Shopping user={user} stores={stores} setStores={setStores} />: null }
+    {/* {user ? <Shopping user={user} stores={stores} setStores={setStores} />: null } */}
     {addShoe ? <NewShoe user={user} setImageList={setImageList} newShoe={shoeList} setShoeList={setShoeList} renderShoe={renderShoe} /> : null}
     {/* {user ? <h2>Welcome back, {user.username}.</h2> : null} */}
     {/* {user && user.shoes ? <>{writeId(user, user.shoes)}</>: null} */}
