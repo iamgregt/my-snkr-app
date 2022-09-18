@@ -26,7 +26,6 @@ function DonateShoe({users, shoe, user, update, setUpdate, clearImageState, setS
         .then(data => {
             console.log(data)
             setUpdate(!update)
-            clearImageState()
             setShoeList(shoes)
         })
     }

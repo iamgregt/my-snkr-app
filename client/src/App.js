@@ -104,7 +104,6 @@ function App() {
   }
 
   function clearImageState(){
-    setImageList([])
     setShoeList([])
   }
 
