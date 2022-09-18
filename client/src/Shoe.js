@@ -5,10 +5,12 @@ import DonateShoe from "./DonateShoe";
 import Card from 'react-bootstrap/Card'
 import ListGroup from 'react-bootstrap/ListGroup'
 import myJson from './assets/shoeDescriptions.json'
+import CardGroup from 'react-bootstrap/CardGroup'
 
 
 
 function Shoe({shoeList, deleteShoe, users}) {
+
 
 
     const handleClose = () => setShow(false);
@@ -22,10 +24,13 @@ function Shoe({shoeList, deleteShoe, users}) {
         e.preventDefault(e)
         console.log(e)
       }
+
+
   
 
     return (
         <div id='shoeContainer'>
+            <CardGroup>
            
         {shoeList ? shoeList.map((s) => {
             let shoeDescription = ""
@@ -34,7 +39,7 @@ function Shoe({shoeList, deleteShoe, users}) {
 
             return(
         <div>
-         <Card style={{ width: '18rem' }}>
+         <Card id={s.id} style={{ width: '18rem' }}>
       <Card.Img variant="top" src={s.firebase} />
       <Card.Body>
         <Card.Title>{s.brand}</Card.Title>
@@ -65,7 +70,7 @@ function Shoe({shoeList, deleteShoe, users}) {
           <Button size="lg" variant="primary" onClick={handleUpdate}>
             Update Shoe
           </Button>
-          <Button size="lg" variant="danger" onClick={handleClose}>
+          <Button data-shoeID={s.id} size="lg" variant="danger" onClick={deleteShoe}>
             Remove Shoe
           </Button>
           <Button size="lg" variant="secondary" onClick={handleClose}>
@@ -78,7 +83,9 @@ function Shoe({shoeList, deleteShoe, users}) {
       </div>
         )
         }): null}
+        </CardGroup>
         </div>
+
     )
 }
 

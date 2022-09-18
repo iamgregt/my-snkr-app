@@ -118,7 +118,8 @@ function App() {
   }
   function deleteShoe(e){
     console.log(e)
-    const shoe = e.target.id
+    const shoe = e.target.dataset.shoeid
+    console.log(shoe)
     const shoeImg = document.getElementById(shoe)
     shoeImg.remove()
 
@@ -142,7 +143,7 @@ function App() {
     });
     })
 
-    fetch(`/shoes/${e.target.id}`, {
+    fetch(`/shoes/${shoe}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json"
