@@ -25,10 +25,6 @@ function Shoe({shoeList, deleteShoe, users, user, clearImageState, setShoeList, 
     const [show, setShow] = useState(false);
     const [update, setUpdate] = useState(false)
     
-    function handleUpdateShoeForm(e){
-        e.preventDefault(e)
-        console.log(e)
-      }
 
         console.log(shoeList)
         console.log(user)
@@ -65,7 +61,6 @@ function Shoe({shoeList, deleteShoe, users, user, clearImageState, setShoeList, 
         <Modal.Header closeButton>
           <Modal.Title>What do you want to do?</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
         <Modal.Footer>
           <Button size="lg" variant="primary" onClick={handleUpdate}>
             Update Shoe
@@ -77,7 +72,7 @@ function Shoe({shoeList, deleteShoe, users, user, clearImageState, setShoeList, 
             Close
           </Button>
         </Modal.Footer>
-        {update ? <DonateShoe shoes={shoes} shoeList={shoeList} setShoeList={setShoeList} clearImageState={clearImageState} shoe={s} users={users} user={user} update={update} setUpdate={setUpdate} /> : null}
+        {update ? <DonateShoe show={show} setShow={setShow} shoes={shoes} shoeList={shoeList} setShoeList={setShoeList} clearImageState={clearImageState} shoe={s} users={users} user={user} update={update} setUpdate={setUpdate} /> : null}
       </Modal>
       
       </div>
