@@ -1,4 +1,5 @@
 import {useEffect, useState} from 'react'
+import Store from './Store'
 
 function Shopping({user}){
   const [stores, setStores] = useState([])
@@ -28,10 +29,7 @@ function Shopping({user}){
     <li className="list-group-item"><h2>Puma</h2></li>
     <li className="list-group-item"><h2>Reebok</h2></li>
   </ul>
-  {/* <div class="card-body">
-    <a href="#" class="card-link">Card link</a>
-    <a href="#" class="card-link">Another link</a>
-  </div> */}
+  {stores ? <Store stores={stores} /> : null}
 </div>
     )
 }
