@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/esm/Button';
 
 
 
-function DonateShoe({show, setShow, users, shoe, user, update, setUpdate, clearImageState, setShoeList, shoeList, shoes}){
+function DonateShoe({show, setShow, users, shoe, user, update, setUpdate, setShoeList, shoeList, shoes}){
 
     function handleUpdate(e){
         e.preventDefault()
@@ -26,7 +26,7 @@ function DonateShoe({show, setShow, users, shoe, user, update, setUpdate, clearI
         .then(data => {
             console.log(data)
             setUpdate(!update)
-            setShoeList(shoes)
+            setShoeList(shoeList)
             setShow(!show)
             alert(`Look at how nice you are! You've donated your ${shoe.brand}`)
             const shoeImg = document.getElementById(shoe.id)

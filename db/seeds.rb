@@ -23,10 +23,23 @@
 
 User.create(
     username: "gregt",
-    password: "test",
+    password: "test"
     
+)
+
+User.create(
+    username: "testuser",
+    password: "test"
 )
 
 Store.create(
     name: "Finish Line"
+)
+
+Store.create(
+    name: "Hibbett Sports"
+)
+
+Store.create(
+    name: "Footlocker"
 )

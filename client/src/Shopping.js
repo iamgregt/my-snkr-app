@@ -1,7 +1,14 @@
-import {Tween, Power3} from 'gsap'
-import {useEffect, useRef} from 'react'
+import {useEffect, useState} from 'react'
 
-function Shopping({user, stores, setStores}){
+function Shopping({user}){
+  const [stores, setStores] = useState([])
+
+
+  useEffect(() => {
+    fetch('/stores')
+    .then(r => r.json())
+    .then(s => setStores(s))
+  }, [])
 
     
 
@@ -10,7 +17,7 @@ function Shopping({user, stores, setStores}){
         <div className="card">
   {/* <img className="card-img-top" src="https://1000logos.net/wp-content/uploads/2020/10/Finish-Line-Logo-1976.png" alt="Card image cap" /> */}
   <div className="card-body"><div>
-    <h2>Welcome back, {user.username}! </h2>
+    {user ? <h2>Welcome back, {user.username}! </h2> : null}
     </div>
     <h5 className="card-title">You're now viewing your closet</h5>
     <p className="card-text">Which pair are you feeling for today???</p>

@@ -3,7 +3,7 @@ import {useState} from "react"
 import {useNavigate} from "react-router-dom"
 
 
-function Login({onLogin, shoes}) {
+function Login({onLogin}) {
 
     const [authMode, setAuthMode] = useState("signin")
     const [username, setUsername] = useState('')
