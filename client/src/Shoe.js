@@ -10,6 +10,8 @@ import NewShoe from "./NewShoe";
 import { storage } from './firebase';
 import { ref, listAll, getDownloadURL, getMetadata, deleteObject } from 'firebase/storage';
 import { async } from "@firebase/util";
+import {useNavigate} from "react-router-dom"
+
 
 
 
@@ -19,6 +21,9 @@ function Shoe({ deleteShoe, users, user}) {
   const [shoeList, setShoeList] = useState([])
   const [imageList, setImageList] = useState([])
   const [addShoe, setAddShoe] = useState(false)
+  const [picid, setPicid] = useState(null)
+
+  const navigate = useNavigate()
 
   
   const getShoes = () => {
@@ -29,12 +34,26 @@ function Shoe({ deleteShoe, users, user}) {
 
 
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleClose = () => {
+      let removeBtn = document.getElementById('remove-button')
+      console.log(removeBtn)
+      setShow(false)
+
+    };
+    const handleShow = (e) => {
+      setShow(true)
+      console.log(e)
+    };
     const handleUpdate = () => setUpdate(true)
-    const handleRemove = (e) => {
+    let handleRemove = (e) => {
         setShow(false)
+        console.log(e)
+        console.log(e.target.dataset.shoeid)
         deleteShoe(e)
+        
+        
+       
+        
     }
 
     const [show, setShow] = useState(false);
@@ -86,9 +105,9 @@ function Shoe({ deleteShoe, users, user}) {
 
     function deleteShoe(e){
       console.log(e)
-      const shoe = e.target.dataset.shoeid
+      let shoe = e.target.dataset.shoeid
       console.log(shoe)
-      const shoeImg = document.getElementById(shoe)
+      let shoeImg = document.getElementById(shoe)
       shoeImg.remove()
   
       setShoeList(shoeList.filter((i) => {
@@ -116,7 +135,10 @@ function Shoe({ deleteShoe, users, user}) {
         headers: {
           "Content-Type": "application/json"
         }
-      }).then(r => console.log('removed from database'))
+      }).then(r => {
+        console.log('removed from database')
+        window.location.reload(false)
+      })
      
       
     }
@@ -145,7 +167,9 @@ function Shoe({ deleteShoe, users, user}) {
       // }
     while(shoeList.length === 0 ){
       return(
-        <>Loading</>
+        <>Loading
+        <NewShoe setShoeList={setShoeList} user={user} setImageList={setImageList} renderShoe={renderShoe} addShoe={addShoe} setAddShoe={setAddShoe} />
+        </>
       )
     }
 
@@ -185,17 +209,15 @@ function Shoe({ deleteShoe, users, user}) {
         Shoe Management
       </Button>
       </Card.Body>
-    </Card>
-      
-    <Modal show={show} onHide={handleClose}>
+      <Modal data-picid={s.id} show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>What do you want to do?</Modal.Title>
         </Modal.Header>
-        <Modal.Footer>
+        <Modal.Footer data-picid={s.id}>
           <Button size="lg" variant="primary" onClick={handleUpdate}>
             Update Shoe
           </Button>
-          <Button data-shoeid={s.id} size="lg" variant="danger" onClick={handleRemove}>
+          <Button id='remove-button' data-shoeid={s.id} size="lg" variant="danger" onClick={(e) => handleRemove(e)}>
             Remove Shoe
           </Button>
           <Button size="lg" variant="secondary" onClick={handleClose}>
@@ -204,6 +226,9 @@ function Shoe({ deleteShoe, users, user}) {
         </Modal.Footer>
         {update ? <DonateShoe show={show} setShow={setShow} shoeList={shoeList} setShoeList={setShoeList} shoe={s} users={users} user={user} update={update} setUpdate={setUpdate} /> : null}
       </Modal>
+    </Card>
+      
+   
       
       </div>
         )
