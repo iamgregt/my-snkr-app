@@ -7,7 +7,10 @@ function Store({stores}){
                 <ul>
                     {s.shoes.map((k) => {
                         return(
+                            <div>
                         <li>{k.brand}</li>
+                        <img src={k.firebase} />
+                        </div>
                         )
                     })}
                 </ul>
