@@ -4,12 +4,16 @@ import { getDownloadURL, ref, uploadBytes, updateMetadata } from "firebase/stora
 import { uuidv4 } from "@firebase/util"
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import {useNavigate} from "react-router-dom"
 
 
 
-function NewShoe({user, setImageList, renderShoe, addShoe, setAddShoe}){
+function NewShoe({user, setImageList, renderShoe, addShoe, setAddShoe, setShoeList}){
     const [imageUpload, setImageUpload] = useState(null)
     const [isJordan, setIsJordan] = useState(false)
+
+    const navigate = useNavigate()
+
 
 
     function handleNewJordan(e){
@@ -22,6 +26,7 @@ function NewShoe({user, setImageList, renderShoe, addShoe, setAddShoe}){
     function newShoeForm() {
             return(
                 <>
+               
                 <h2>Got a new pair?</h2>
                 <h3>Go ahead and add them to your closet!</h3>
                 <Form onSubmit={handleSubmit}>
@@ -89,6 +94,7 @@ function NewShoe({user, setImageList, renderShoe, addShoe, setAddShoe}){
             getDownloadURL(snapshot.ref).then((url) => {
                
                 setImageList((prev) => [...prev, url])
+
                 
                 
                 const shoe = {
@@ -111,8 +117,10 @@ function NewShoe({user, setImageList, renderShoe, addShoe, setAddShoe}){
               .then(r => r.json()).then(newShoe => {
                 shoe.id = newShoe.id
                 console.log(newShoe)
-                renderShoe(shoe)
+                console.log(shoe)
+                setShoeList((prev) => [...prev, newShoe])
                 setAddShoe(!addShoe)
+                // navigate('/')
               
 
               })

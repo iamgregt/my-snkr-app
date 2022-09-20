@@ -79,6 +79,7 @@ function Shoe({ deleteShoe, users, user}) {
 
     function renderShoe(newShoe){
       console.log(newShoe)
+      console.log(shoeList)
       setShoeList((prevArr) => [...prevArr, newShoe])
       console.log('newImg added')
     }
@@ -152,16 +153,17 @@ function Shoe({ deleteShoe, users, user}) {
     console.log("loading")
     console.log(shoeList)
     console.log(user)
-    const usrList = shoeList.filter(s => s.user.id === user.id)
-    }
+    let usrList = [...shoeList]
+     usrList = usrList.filter(s => s.user.id === user.id)
+    
     return (
       <>
       <Button variant='dark' style={{marginTop: '3rem', marginBottom: '3rem'}} size='lg ' onClick={() => setAddShoe(!addShoe)}>{addShoe ? <>Forget About It!</>: <>Add a pair?</>}</Button>
-      {addShoe ? <NewShoe user={user} setImageList={setImageList} renderShoe={renderShoe} addShoe={addShoe} setAddShoe={setAddShoe} /> : null}
+      {addShoe ? <NewShoe setShoeList={setShoeList} user={user} setImageList={setImageList} renderShoe={renderShoe} addShoe={addShoe} setAddShoe={setAddShoe} /> : null}
         <div id='shoeContainer'>
             <CardGroup>
            
-       {user ? shoeList.filter((s) => s.user.id === user.id).map((s) => {
+       {user ? usrList.filter((s) => s.user.id === user.id).map((s) => {
             // console.log(s)
             let shoeDescription = ""
             const shoeJson = myJson.find(d => d.name == s.brand)
@@ -205,12 +207,12 @@ function Shoe({ deleteShoe, users, user}) {
       
       </div>
         )
-        }) : console.log('something went wrong')}
+        }) : null}
         </CardGroup>
         </div>
         </>
 
-    )
+    )}
       }
     //   else{
     //     return(
