@@ -13,6 +13,7 @@ import { assert } from '@firebase/util';
 import Navi from './Navi';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './HomePage';
+import ShoeDeletedPage from './ShoeDeletedPage';
 
 
 
@@ -132,6 +133,7 @@ function App() {
       <Route path="/shoepage" element={<Shoe users={users} handleUpdate={handleUpdateShoeForm} user={user} />} />
       <Route path="/" element={<HomePage />} />
       <Route path="/shop" element={<Shopping user={user} />} />
+      <Route path="/deleted" element={<ShoeDeletedPage />} />
     </Routes>
 </>
   );

@@ -11,6 +11,7 @@ import { storage } from './firebase';
 import { ref, listAll, getDownloadURL, getMetadata, deleteObject } from 'firebase/storage';
 import { async } from "@firebase/util";
 import {useNavigate} from "react-router-dom"
+// import Spinner from "react-bootstrap/Spinner"
 
 
 
@@ -137,7 +138,7 @@ function Shoe({ deleteShoe, users, user}) {
         }
       }).then(r => {
         console.log('removed from database')
-        window.location.reload(false)
+        navigate('/deleted')
       })
      
       
@@ -147,28 +148,14 @@ function Shoe({ deleteShoe, users, user}) {
     console.log(shoeList.length)
 
     
-
-        // console.log(shoeList)
-        // setShoeList(shoes)
-        // console.log(shoes)
-        // console.log(user)
-        // let userShoes = shoeList
-        // let newestShoe = userShoes[userShoes.length - 1]
-        // userShoes.map((s) => {
-        //     s.user_id = user.id
-        //     console.log(s)
-        // })
-        // console.log(newestShoe)
-        // console.log(shoeList.length)
-      // if(shoeList.length !== 0){
-      //   console.log(userShoes)
-      //   userShoes = userShoes.filter((kick) => kick !== newestShoe)
-      //   console.log(userShoes)
-      // }
     while(shoeList.length === 0 ){
       return(
-        <>Loading
+        <>
+        <h1>You do not have any shoes.</h1>
         <NewShoe setShoeList={setShoeList} user={user} setImageList={setImageList} renderShoe={renderShoe} addShoe={addShoe} setAddShoe={setAddShoe} />
+        {/* <Spinner animation="border" role="status">
+      <span className="visually-hidden">Loading...</span>
+    </Spinner> */}
         </>
       )
     }
