@@ -184,7 +184,7 @@ function Shoe({ deleteShoe, users, user}) {
 
             return(
         <div>
-         <Card id={s.id} style={{ width: '18rem' }}>
+         <Card id={s.id} data-cardid={s.id} style={{ width: '18rem' }}>
       <Card.Img variant="top" src={s.firebase} />
       <Card.Body>
         <Card.Title>{s.brand}</Card.Title>
