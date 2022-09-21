@@ -139,6 +139,8 @@ function Shoe({ deleteShoe, users, user}) {
       }).then(r => {
         console.log('removed from database')
         navigate('/deleted')
+      }).catch((error) => {
+        alert(error)
       })
      
       
