@@ -17,13 +17,12 @@ import {useNavigate} from "react-router-dom"
 
 
 
-function Shoe({ deleteShoe, users}) {
+function Shoe({ deleteShoe, users, user}) {
 
   const [shoeList, setShoeList] = useState([])
   const [imageList, setImageList] = useState([])
   const [addShoe, setAddShoe] = useState(false)
   const [picid, setPicid] = useState(null)
-  const [user, setUser] = useState(null)
 
   const navigate = useNavigate()
 
@@ -47,13 +46,12 @@ function Shoe({ deleteShoe, users}) {
       console.log(e)
     };
     const handleUpdate = () => setUpdate(true)
-    
-    const handleRemove = (e, shu) => {
+    let handleRemove = (e, s) => {
         setShow(false)
+        console.log(s)
         console.log(e)
-        console.log(shu)
         console.log(e.target.dataset.shoeid)
-        deleteShoe(shu)
+        deleteShoe(e, s)
         
         
        
@@ -68,14 +66,6 @@ function Shoe({ deleteShoe, users}) {
 
 
     useEffect(() => {
-      fetch("/me").then((r) => {
-        if(r.ok) {
-          r.json().then((user) => setUser(user))
-          console.log('cool')  
-          console.log(user)  
-        }
-      })
-      
       fetch("/shoes/")
       .then(r => r.json())
       .then(s => {
@@ -115,9 +105,9 @@ function Shoe({ deleteShoe, users}) {
       console.log('newImg added')
     }
 
-    function deleteShoe(e){
+    function deleteShoe(e, s){
       console.log(e)
-      let shoe = e.id
+      let shoe = s.id
       console.log(shoe)
       let shoeImg = document.getElementById(shoe)
       shoeImg.remove()
@@ -188,14 +178,13 @@ function Shoe({ deleteShoe, users}) {
             <CardGroup>
            
        {user ? usrList.filter((s) => s.user.id === user.id).map((s) => {
-            const theShoe = s
+            // console.log(s)
             let shoeDescription = ""
             const shoeJson = myJson.find(d => d.name == s.brand)
             shoeJson ? shoeDescription = shoeJson.description : shoeDescription = "no desc"
-            console.log(theShoe)
 
             return(
-        theShoe ? <div>
+        <div>
          <Card id={s.id} data-cardid={s.id} style={{ width: '18rem' }}>
       <Card.Img variant="top" src={s.firebase} />
       <Card.Body>
@@ -218,10 +207,9 @@ function Shoe({ deleteShoe, users}) {
           <Button size="lg" variant="primary" onClick={handleUpdate}>
             Update Shoe
           </Button>
-          <Button id='remove-button' data-shoeid={s.id} size="lg" variant="danger" onClick={(e) => handleRemove(e, theShoe)}>
+          <Button id='remove-button' data-shoeid={s.id} size="lg" variant="danger" onClick={(e) => handleRemove(e, s)}>
             Remove Shoe
           </Button>
-          <Button onClick={console.log(theShoe)}>Test Button</Button>
           <Button size="lg" variant="secondary" onClick={handleClose}>
             Close
           </Button>
@@ -232,7 +220,7 @@ function Shoe({ deleteShoe, users}) {
       
    
       
-      </div> : null
+      </div>
         )
         }) : null}
         </CardGroup>
