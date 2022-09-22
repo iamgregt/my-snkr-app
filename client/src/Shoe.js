@@ -183,6 +183,7 @@ function Shoe({ deleteShoe, users, user}) {
             let shoeDescription = ""
             const shoeJson = myJson.find(d => d.name == s.brand)
             shoeJson ? shoeDescription = shoeJson.description : shoeDescription = "no desc"
+            console.log(theShoe)
 
             return(
         <div>
