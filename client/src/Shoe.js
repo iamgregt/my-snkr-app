@@ -52,7 +52,7 @@ function Shoe({ deleteShoe, users, user}) {
         console.log(e)
         console.log(shu)
         console.log(e.target.dataset.shoeid)
-        deleteShoe(e)
+        deleteShoe(shu)
         
         
        
@@ -108,7 +108,7 @@ function Shoe({ deleteShoe, users, user}) {
 
     function deleteShoe(e){
       console.log(e)
-      let shoe = e.target.dataset.shoeid
+      let shoe = e.id
       console.log(shoe)
       let shoeImg = document.getElementById(shoe)
       shoeImg.remove()
@@ -208,7 +208,7 @@ function Shoe({ deleteShoe, users, user}) {
           <Button size="lg" variant="primary" onClick={handleUpdate}>
             Update Shoe
           </Button>
-          <Button id='remove-button' data-shoeid={s.id} size="lg" variant="danger" onClick={(e, theShoe) => handleRemove(e, theShoe)}>
+          <Button id='remove-button' data-shoeid={s.id} size="lg" variant="danger" onClick={(e) => handleRemove(e, theShoe)}>
             Remove Shoe
           </Button>
           <Button onClick={console.log(theShoe)}>Test Button</Button>
