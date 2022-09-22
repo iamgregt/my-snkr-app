@@ -12,7 +12,7 @@ function Navi({handleLogOut, user}) {
     const clickAction = user ? handleLogOut : null
 
     return(
-      <Button onClick={clickAction} variant={buttonVariant}>{user ? <>Logout</> : <>Login</>}</Button>
+      <Button onClick={(clickAction)} variant={buttonVariant}>{user ? <>Logout</> : <>Login</>}</Button>
     )
   }
 
@@ -26,7 +26,7 @@ function Navi({handleLogOut, user}) {
           <Nav className="me-auto">
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/shoepage">Shoes</Nav.Link>
-            <Nav.Link href="/shop">Shop</Nav.Link>
+           {user ?  <Nav.Link href="/shop">Shop</Nav.Link>: null}
           <Navbar.Text style={{textAlign: 'right'}}>
             Signed in as: <a href="/login">{user ? user.username : <>Please Sign In</>}</a>
           </Navbar.Text>

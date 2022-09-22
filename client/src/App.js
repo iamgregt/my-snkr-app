@@ -14,10 +14,14 @@ import Navi from './Navi';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './HomePage';
 import ShoeDeletedPage from './ShoeDeletedPage';
+import {useNavigate} from "react-router-dom"
+
 
 
 
 function App() {
+
+  const navigate = useNavigate()
 
 
   const [user, setUser] = useState(null)
@@ -102,7 +106,11 @@ function App() {
   function handleLogOut(){
     fetch('/logout', {
       method: "DELETE"
-    }).then(() => setUser())
+    }).then(() => {
+      setUser()
+      navigate('/')
+      
+    })
   }
 
   // function clearImageState(){
@@ -125,7 +133,7 @@ function App() {
 
   return (
     <>
-    <Navi handleLogOut={handleLogOut} user={user} />
+    <Navi handleLogOut={(handleLogOut)} user={user} />
     {/* {user ? <Button variant='dark' style={{marginTop: '3rem', marginBottom: '3rem'}} size='lg ' onClick={() => setAddShoe(!addShoe)}>{addShoe ? <>Forget About It!</>: <>Add a pair?</>}</Button> :null} */}
     {!user ? <Login onLogin={setUser} /> : null}
     {/* {addShoe ? <NewShoe user={user} setImageList={setImageList} renderShoe={renderShoe} addShoe={addShoe} setAddShoe={setAddShoe} /> : null} */}
