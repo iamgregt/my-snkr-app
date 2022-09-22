@@ -8,7 +8,9 @@ function Shopping({user}){
   useEffect(() => {
     fetch('/stores')
     .then(r => r.json())
-    .then(s => setStores(s))
+    .then(s => {
+      console.log(s)
+      setStores(s)})
   }, [])
 
     
