@@ -17,12 +17,13 @@ import {useNavigate} from "react-router-dom"
 
 
 
-function Shoe({ deleteShoe, users, user}) {
+function Shoe({ deleteShoe, users}) {
 
   const [shoeList, setShoeList] = useState([])
   const [imageList, setImageList] = useState([])
   const [addShoe, setAddShoe] = useState(false)
   const [picid, setPicid] = useState(null)
+  const [user, setUser] = useState(null)
 
   const navigate = useNavigate()
 
@@ -67,6 +68,14 @@ function Shoe({ deleteShoe, users, user}) {
 
 
     useEffect(() => {
+      fetch("/me").then((r) => {
+        if(r.ok) {
+          r.json().then((user) => setUser(user))
+          console.log('cool')  
+          console.log(user)  
+        }
+      })
+      
       fetch("/shoes/")
       .then(r => r.json())
       .then(s => {
@@ -186,7 +195,7 @@ function Shoe({ deleteShoe, users, user}) {
             console.log(theShoe)
 
             return(
-        <div>
+        theShoe ? <div>
          <Card id={s.id} data-cardid={s.id} style={{ width: '18rem' }}>
       <Card.Img variant="top" src={s.firebase} />
       <Card.Body>
@@ -223,7 +232,7 @@ function Shoe({ deleteShoe, users, user}) {
       
    
       
-      </div>
+      </div> : null
         )
         }) : null}
         </CardGroup>

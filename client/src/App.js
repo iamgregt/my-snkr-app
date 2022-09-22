@@ -130,7 +130,7 @@ function App() {
     {!user ? <Login onLogin={setUser} /> : null}
     {/* {addShoe ? <NewShoe user={user} setImageList={setImageList} renderShoe={renderShoe} addShoe={addShoe} setAddShoe={setAddShoe} /> : null} */}
     <Routes>
-      <Route path="/shoepage" element={<Shoe users={users} handleUpdate={handleUpdateShoeForm} user={user} />} />
+      <Route path="/shoepage" element={<Shoe users={users} handleUpdate={handleUpdateShoeForm} user={user} setUser={setUser} />} />
       <Route path="/" element={<HomePage />} />
       <Route path="/shop" element={<Shopping user={user} />} />
       <Route path="/deleted" element={<ShoeDeletedPage />} />
