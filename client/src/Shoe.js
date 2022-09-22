@@ -46,12 +46,13 @@ function Shoe({ deleteShoe, users, user}) {
       console.log(e)
     };
     const handleUpdate = () => setUpdate(true)
-    let handleRemove = (e, s) => {
+    
+    const handleRemove = (e, shu) => {
         setShow(false)
-        console.log(s)
         console.log(e)
+        console.log(shu)
         console.log(e.target.dataset.shoeid)
-        deleteShoe(e, s)
+        deleteShoe(e)
         
         
        
@@ -105,9 +106,9 @@ function Shoe({ deleteShoe, users, user}) {
       console.log('newImg added')
     }
 
-    function deleteShoe(e, s){
+    function deleteShoe(e){
       console.log(e)
-      let shoe = s.id
+      let shoe = e.target.dataset.shoeid
       console.log(shoe)
       let shoeImg = document.getElementById(shoe)
       shoeImg.remove()
@@ -178,7 +179,7 @@ function Shoe({ deleteShoe, users, user}) {
             <CardGroup>
            
        {user ? usrList.filter((s) => s.user.id === user.id).map((s) => {
-            // console.log(s)
+            const theShoe = s
             let shoeDescription = ""
             const shoeJson = myJson.find(d => d.name == s.brand)
             shoeJson ? shoeDescription = shoeJson.description : shoeDescription = "no desc"
@@ -207,9 +208,10 @@ function Shoe({ deleteShoe, users, user}) {
           <Button size="lg" variant="primary" onClick={handleUpdate}>
             Update Shoe
           </Button>
-          <Button id='remove-button' data-shoeid={s.id} size="lg" variant="danger" onClick={(e) => handleRemove(e, s)}>
+          <Button id='remove-button' data-shoeid={s.id} size="lg" variant="danger" onClick={(e, theShoe) => handleRemove(e, theShoe)}>
             Remove Shoe
           </Button>
+          <Button onClick={console.log(theShoe)}>Test Button</Button>
           <Button size="lg" variant="secondary" onClick={handleClose}>
             Close
           </Button>
