@@ -193,6 +193,7 @@ function Shoe({ deleteShoe, users, user}) {
       <ListGroup className="list-group-flush">
         <ListGroup.Item>Shoe Size: {s.size}</ListGroup.Item>
         <ListGroup.Item>{shoeDescription}</ListGroup.Item>
+        <ListGroup.Item>{s.for_sale ? <>This is For Sale</> : <>Not For Sale</>}</ListGroup.Item>
       </ListGroup>
       <Card.Body>
       <Button size="lg" variant="primary" onClick={handleShow}>

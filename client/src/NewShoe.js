@@ -103,7 +103,9 @@ function NewShoe({user, setImageList, renderShoe, addShoe, setAddShoe, setShoeLi
                   size: isJordan ? e.target[3].value : e.target[2].value,
                   user_id: user.id,
                   image: snapshot.ref._location.path_,
-                  firebase: url
+                  firebase: url,
+                  for_sale: isJordan ? e.target[5].checked : e.target[4].checked
+                  
               }
     
 
