@@ -121,6 +121,12 @@ function Login({onLogin}) {
       <form className="Auth-form" onSubmit={onSignUp}>
         <div className="Auth-form-content">
           <h3 className="Auth-form-title">Sign Up</h3>
+          <div className="text-center">
+                  Already a User?{" "}
+                  <span className="link-primary" onClick={changeAuthMode}>
+                    <a href="#">Sign In</a>
+                  </span>
+                </div>
           <div className="form-group mt-3">
             <label>Username</label>
             <input

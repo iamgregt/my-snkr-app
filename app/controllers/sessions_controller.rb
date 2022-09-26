@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
 
     wrap_parameters format: []
+    skip_before_action :authorized, only: :create
 
 
     def create

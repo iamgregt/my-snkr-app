@@ -20,7 +20,7 @@ function Shopping({user}){
         <div className="card">
   {/* <img className="card-img-top" src="https://1000logos.net/wp-content/uploads/2020/10/Finish-Line-Logo-1976.png" alt="Card image cap" /> */}
   <div className="card-body"><div>
-    {user ? <h2>Welcome back to your Shop, {user.username}! </h2> : null}
+    {user ? <h1>Welcome back, {user.username}! </h1> : null}
     </div>
   </div>
   {/* <ul className="list-group list-group-flush">

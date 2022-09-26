@@ -14,6 +14,10 @@ class StoresController < ApplicationController
         render json: store, status: :accepted
     end
 
+    def create
+        render json: Store.create(store_params)
+    end
+
     private
 
     def store_params

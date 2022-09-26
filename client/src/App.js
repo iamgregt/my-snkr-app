@@ -15,6 +15,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './HomePage';
 import ShoeDeletedPage from './ShoeDeletedPage';
 import {useNavigate} from "react-router-dom"
+import UserPage from './UserPage';
 
 
 
@@ -51,12 +52,14 @@ function App() {
     })
   }, [])
 
+
   useEffect(() => {
     fetch('/users')
     .then(r => r.json())
     .then(data => setUsers(data))  
   }, [])
   
+
   
   // useEffect(() => {
   //   fetch("/shoes/")
@@ -107,8 +110,9 @@ function App() {
     fetch('/logout', {
       method: "DELETE"
     }).then(() => {
-      setUser()
       navigate('/')
+      setUser()
+      
       
     })
   }
@@ -129,19 +133,22 @@ function App() {
     console.log(e)
   }
 
+  if(!user) return <Login onLogin={setUser} />
+
+
 
 
   return (
     <>
     <Navi handleLogOut={(handleLogOut)} user={user} />
     {/* {user ? <Button variant='dark' style={{marginTop: '3rem', marginBottom: '3rem'}} size='lg ' onClick={() => setAddShoe(!addShoe)}>{addShoe ? <>Forget About It!</>: <>Add a pair?</>}</Button> :null} */}
-    {!user ? <Login onLogin={setUser} /> : null}
     {/* {addShoe ? <NewShoe user={user} setImageList={setImageList} renderShoe={renderShoe} addShoe={addShoe} setAddShoe={setAddShoe} /> : null} */}
     <Routes>
       <Route path="/shoepage" element={<Shoe users={users} handleUpdate={handleUpdateShoeForm} user={user} />} />
       <Route path="/" element={<HomePage />} />
       <Route path="/shop" element={<Shopping user={user} />} />
       <Route path="/deleted" element={<ShoeDeletedPage />} />
+      <Route path="/userpage" element={<UserPage users={users} />} />
     </Routes>
 </>
   );

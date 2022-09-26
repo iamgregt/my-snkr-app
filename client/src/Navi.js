@@ -26,7 +26,8 @@ function Navi({handleLogOut, user}) {
           <Nav className="me-auto">
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/shoepage">Shoes</Nav.Link>
-           {user ?  <Nav.Link href="/shop">Shop</Nav.Link>: null}
+          <Nav.Link href="/shop">Shop</Nav.Link>
+          <Nav.Link href='/userpage'>Users</Nav.Link>
           <Navbar.Text style={{textAlign: 'right'}}>
             Signed in as: <a href="/login">{user ? user.username : <>Please Sign In</>}</a>
           </Navbar.Text>
