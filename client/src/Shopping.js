@@ -23,12 +23,6 @@ function Shopping({user}){
     {user ? <h1>Welcome back, {user.username}! </h1> : null}
     </div>
   </div>
-  {/* <ul className="list-group list-group-flush">
-    <li className="list-group-item"><h2>Jordan</h2></li>
-    <li className="list-group-item"><h2>Nike</h2></li>
-    <li className="list-group-item"><h2>Puma</h2></li>
-    <li className="list-group-item"><h2>Reebok</h2></li>
-  </ul> */}
   {stores ? <Store stores={stores} /> : null}
 </div>
     )

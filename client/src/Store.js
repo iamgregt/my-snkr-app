@@ -35,10 +35,18 @@ function Store({stores}){
       </Button>
     </Form>
         {stores.map((s) => {
+            console.log(s)
             return(<>
                 <h2>{s.name}</h2>
+                <h3>Users That Have Shoes From Here</h3>
                 <ul>
+                  {s.users.map((u) => {return (
+                    <li>{u.username}</li>
+        )})}
+                </ul>
+                {/* <ul>
                     {s.shoes.filter((i => i.for_sale === true)).map((k) => {
+                      console.log(k)
                         return(
                             <div>
                         <li>{k.brand}</li>
@@ -46,7 +54,7 @@ function Store({stores}){
                         </div>
                         )
                     })}
-                </ul>
+                </ul> */}
                 </>
             )
         })}

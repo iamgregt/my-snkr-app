@@ -1,6 +1,8 @@
+import Carousel from 'react-bootstrap/Carousel';
+
 function HomePage(){
     return(
-        <h1>Welcome!</h1>
+        <h1>Welome to MySneakers</h1>
     )
 }
 
