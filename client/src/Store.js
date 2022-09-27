@@ -44,17 +44,7 @@ function Store({stores}){
                     <li>{u.username}</li>
         )})}
                 </ul>
-                {/* <ul>
-                    {s.shoes.filter((i => i.for_sale === true)).map((k) => {
-                      console.log(k)
-                        return(
-                            <div>
-                        <li>{k.brand}</li>
-                        <img src={k.firebase} />
-                        </div>
-                        )
-                    })}
-                </ul> */}
+
                 </>
             )
         })}

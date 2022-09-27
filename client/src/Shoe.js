@@ -182,9 +182,10 @@ function Shoe({ deleteShoe, users, user}) {
             let shoeDescription = ""
             const shoeJson = myJson.find(d => d.name == s.brand)
             shoeJson ? shoeDescription = shoeJson.description : shoeDescription = "no desc"
+            console.log(s.store)
 
             return(
-        <div>
+        <div key={s.id}>
          <Card id={s.id} data-cardid={s.id} style={{ width: '18rem' }}>
       <Card.Img variant="top" src={s.firebase} />
       <Card.Body>
@@ -192,6 +193,7 @@ function Shoe({ deleteShoe, users, user}) {
       </Card.Body>
       <ListGroup className="list-group-flush">
         <ListGroup.Item>Shoe Size: {s.size}</ListGroup.Item>
+        <ListGroup.Item>Store: {s.store.name}</ListGroup.Item>
         <ListGroup.Item>{shoeDescription}</ListGroup.Item>
         <ListGroup.Item>{s.for_sale ? <>This is For Sale</> : <>Not For Sale</>}</ListGroup.Item>
       </ListGroup>
