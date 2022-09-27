@@ -5,7 +5,7 @@ function UserPage({users}){
         <ul>
             {users.map((u) => {
                 return(
-                    <li>{u.summary}</li>
+                    <li key={u.id}>{u.summary}</li>
                 )
             })}
         </ul>
