@@ -30,6 +30,12 @@ https://mysneaker-app.herokuapp.com/
 - NodeJS (v16), and npm
 - Postgresql
 
+## Seeds
+
+- 2 Users
+- 3 Stores
+
+[![Screen-Shot-2022-09-26-at-11-16-44-PM.png](https://i.postimg.cc/W15xnkhG/Screen-Shot-2022-09-26-at-11-16-44-PM.png)](https://postimg.cc/YvmX2jN0)
 ## FAQ
 
 #### How to link my firebase account?
