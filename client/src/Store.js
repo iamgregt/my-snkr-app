@@ -40,7 +40,10 @@ function Store({stores}){
                 <h2>{s.name}</h2>
                 <h3>Users That Have Shoes From Here</h3>
                 <ul>
-                  {s.users.map((u) => {return (
+                  {s.users.map((u) => {
+                    console.log(u)
+                    return (
+                    
                     <li>{u.username}</li>
         )})}
                 </ul>
