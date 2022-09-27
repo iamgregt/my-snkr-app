@@ -1,8 +1,8 @@
+
 # MySneakers
 An application built to help users keep track of their shoe inventory. This includes determining which shoes are for sale, where they were bought, and donating them to other users.
 
-[![Screen-Shot-2022-09-26-at-8-24-34-PM.png](https://i.postimg.cc/gjqPSpsZ/Screen-Shot-2022-09-26-at-8-24-34-PM.png)](https://postimg.cc/FkRqz22r)
-
+[![Screen-Shot-2022-09-26-at-10-36-54-PM.png](https://i.postimg.cc/rFjgL9V4/Screen-Shot-2022-09-26-at-10-36-54-PM.png)](https://postimg.cc/HVJbwX7W)
 
 
 
