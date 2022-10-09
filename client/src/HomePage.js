@@ -1,8 +1,10 @@
-import Carousel from 'react-bootstrap/Carousel';
+import './HomePage.css'
 
 function HomePage(){
     return(
-        <h1>Welome to MySneakers</h1>
+        <div className='homepage'>
+            <h1>Welome to MySneakers</h1>
+        </div>
     )
 }
 

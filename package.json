@@ -11,6 +11,7 @@
     "heroku-postbuild": "npm run clean && npm run build && npm run deploy"
   },
   "dependencies": {
+    "framer-motion": "^7.5.3",
     "react-bootstrap": "^2.5.0"
   }
 }

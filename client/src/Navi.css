@@ -1,0 +1,18 @@
+@font-face {
+    font-family:
+    "HelveticaNeue-Bold";
+    font-style: normal;
+    font-weight: 700;
+    src:
+    url("https://fonts.animaapp.com/HelveticaNeue-Bold") format ("opentype");
+    }
+    
+    .navi{
+        background: linear-gradient(119.1deg, #313132 15.37%, #161618 99.78%);
+    }
+    
+    h1{
+        color: rgba(255, 255, 255, 1);
+        font-family: "HelveticaNeue-Bold";
+    }
+    

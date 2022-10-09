@@ -10,6 +10,7 @@ import HomePage from './HomePage';
 import ShoeDeletedPage from './ShoeDeletedPage';
 import {useNavigate} from "react-router-dom"
 import UserPage from './UserPage';
+import shoepic from './assets/shoepic.png'
 
 
 
@@ -25,7 +26,7 @@ function App() {
       if(r.ok) {
         r.json().then((user) => setUser(user))
         console.log('cool')  
-        console.log(user)  
+        console.log(user)
       }
     })
   }, [])
@@ -62,7 +63,8 @@ function App() {
 
 
   return (
-    <>
+    <div className='App'>
+    <img src={shoepic}/>
     <Navi handleLogOut={(handleLogOut)} user={user} />
     <Routes>
       <Route path="/shoepage" element={<Shoe users={users} handleUpdate={handleUpdateShoeForm} user={user} />} />
@@ -71,7 +73,7 @@ function App() {
       <Route path="/deleted" element={<ShoeDeletedPage />} />
       <Route path="/userpage" element={<UserPage users={users} />} />
     </Routes>
-</>
+</div>
   );
 }
 

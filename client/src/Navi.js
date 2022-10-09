@@ -3,6 +3,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Button from 'react-bootstrap/esm/Button';
+import './Navi.css'
 
 function Navi({handleLogOut, user}) {
 
@@ -17,8 +18,8 @@ function Navi({handleLogOut, user}) {
   }
 
 
-  return (
-    <Navbar style={{paddingBottom: '5rem'}} bg="light" expand="lg">
+  return (<div className='navi'>
+    <Navbar className='navi' style={{paddingBottom: '5rem'}} bg="light" expand="lg">
       <Container>
         <Navbar.Brand href="/">MySneakers</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -37,6 +38,7 @@ function Navi({handleLogOut, user}) {
       </Container>
       
     </Navbar>
+    </div>
   );
 }
 
