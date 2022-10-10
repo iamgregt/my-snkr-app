@@ -64,7 +64,6 @@ function App() {
 
   return (
     <div className='App'>
-    <img src={shoepic}/>
     <Navi handleLogOut={(handleLogOut)} user={user} />
     <Routes>
       <Route path="/shoepage" element={<Shoe users={users} handleUpdate={handleUpdateShoeForm} user={user} />} />

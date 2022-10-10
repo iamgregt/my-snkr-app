@@ -1,14 +1,45 @@
 @font-face {
     font-family:
-    "HelveticaNeue-Bold";
+    "HelveticaNeue-Regular";
     font-style: normal;
-    font-weight: 700;
+    font-weight: 400;
     src:
-    url("https://fonts.animaapp.com/HelveticaNeue-Bold") format ("opentype");
+    url("https://fonts.animaapp.com/HelveticaNeue-Regular") format ("opentype");
+    }
+    @font-face {
+        font-family:
+        "HelveticaNeue-Bold";
+        font-style: normal;
+        font-weight: 700;
+        src:
+        url("https://fonts.animaapp.com/HelveticaNeue-Bold") format ("opentype");
+        }
+
+    .brand{
+        color: white;
+        font-family: "HelveticaNeue-Bold";
+        font-size: 41px;
+        font-weight: 700;
+        letter-spacing: 0;
+        line-height: 41px;
+        min-height: 51px;
+        white-space: nowrap;
     }
     
     .navi{
         background: linear-gradient(119.1deg, #313132 15.37%, #161618 99.78%);
+    }
+
+    .navlinks{
+        letter-spacing: 0.17;
+        line-height: 17px;
+        min-height: 22px;
+        white-space: nowrap;
+        font-size: 25px;
+        font-family: "HelveticaNeue-Regular" ;
+        color: white;
+        font-style: normal;
+        font-weight: 400;
     }
     
     h1{

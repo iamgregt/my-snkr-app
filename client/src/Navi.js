@@ -21,15 +21,15 @@ function Navi({handleLogOut, user}) {
   return (<div className='navi'>
     <Navbar className='navi' style={{paddingBottom: '5rem'}} bg="light" expand="lg">
       <Container>
-        <Navbar.Brand href="/">MySneakers</Navbar.Brand>
+        <Navbar.Brand className='brand' href="/">MySneakers</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/shoepage">Shoes</Nav.Link>
-          <Nav.Link href="/shop">Shop</Nav.Link>
-          <Nav.Link href='/userpage'>Users</Nav.Link>
-          <Navbar.Text style={{textAlign: 'right'}}>
+            <Nav.Link className='navlinks' href="/">Home</Nav.Link>
+            <Nav.Link className='navlinks' href="/shoepage">Shoes</Nav.Link>
+          <Nav.Link className='navlinks' href="/shop">Shop</Nav.Link>
+          <Nav.Link className='navlinks' href='/userpage'>Users</Nav.Link>
+          <Navbar.Text className='navlinks' style={{textAlign: 'right'}}>
             Signed in as: <a href="/login">{user ? user.username : <>Please Sign In</>}</a>
           </Navbar.Text>
           </Nav>
