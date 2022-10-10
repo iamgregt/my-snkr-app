@@ -10,7 +10,7 @@ import HomePage from './HomePage';
 import ShoeDeletedPage from './ShoeDeletedPage';
 import {useNavigate} from "react-router-dom"
 import UserPage from './UserPage';
-import shoepic from './assets/shoepic.png'
+
 
 
 

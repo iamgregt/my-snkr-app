@@ -1,6 +1,7 @@
 import './HomePage.css'
 import {motion} from "framer-motion/dist/framer-motion"
 import { useState } from 'react'
+import shoepic from './assets/shoepic.png'
 
 
 function HomePage(){
@@ -15,7 +16,7 @@ function HomePage(){
           scale: 1,
           transition: {
             delayChildren: 0.3,
-            staggerChildren: 0.2
+            staggerChildren: 0.35
           }
         }
       }
@@ -41,6 +42,17 @@ function HomePage(){
       <motion.li key={index} className="item" variants={item} />
     ))}
   </motion.ul>
+        <motion.ul variants={container2}
+    initial="hidden"
+    animate="visible">
+        <motion.img variants={item}  src={"https://firebasestorage.googleapis.com/v0/b/mysnkrapp.appspot.com/o/SneakerImages%2Fjordan7.pngfd018d88-c466-4953-add0-0d8b05d218b2?alt=media&token=17cfad06-b3be-43fc-91cc-7ef951c49c54"} />
+  <motion.img variants={item} src={"https://firebasestorage.googleapis.com/v0/b/mysnkrapp.appspot.com/o/SneakerImages%2Fpollen.pngad3c3f52-6f60-4e44-b158-ca3082c7103b?alt=media&token=2858b20e-4fb5-482a-8685-734b867aa454"} />
+  <motion.img variants={item} src={"https://firebasestorage.googleapis.com/v0/b/mysnkrapp.appspot.com/o/SneakerImages%2Fflint.pngb6ce6f02-aff0-456d-b58c-382b44dafed8?alt=media&token=6081844f-7ecc-40b8-b9dc-eff227efc2fa"} />
+  <motion.img variants={item} src={"https://firebasestorage.googleapis.com/v0/b/mysnkrapp.appspot.com/o/SneakerImages%2Fjordan_1_blacktoe.png4c20b559-73dd-4fdb-b285-a6f07267456b?alt=media&token=d45b5997-ee89-49e2-b8a6-ccef1733691e"} />
+        </motion.ul>
+        <div className='homepic-container'>
+        <motion.img className='homepic' src={shoepic} />
+        </div>
         </div>
     )
 }

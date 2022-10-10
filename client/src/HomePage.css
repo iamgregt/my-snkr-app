@@ -35,3 +35,28 @@ h1{
     background: rgba(255, 255, 255, 0.2);
     border-radius: 50px;
   }
+
+  .homepic{
+    border-radius: 17px;
+    display: block;
+    height: 948px;
+    object-fit: cover;
+    opacity: 0;
+    width: 631px;
+    animation: animate-enter-frames 3s ease 0s 1 normal forwards;
+  }
+
+  .homepic-container{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+
+  @keyframes animate-enter-frames {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+  }
