@@ -41,9 +41,9 @@ h1{
     display: block;
     height: 948px;
     object-fit: cover;
-    opacity: 0;
+    opacity: 1;
     width: 631px;
-    animation: animate-enter-frames 3s ease 0s 1 normal forwards;
+    /* animation: animate-enter-frames 3s ease 0s 1 normal forwards; */
   }
 
   .homepic-container{
