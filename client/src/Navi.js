@@ -4,8 +4,11 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Button from 'react-bootstrap/esm/Button';
 import './Navi.css'
+import { useState } from 'react';
+import {useLocation} from 'react-router-dom'
 
 function Navi({handleLogOut, user}) {
+
 
   function renderButton(){
 
@@ -17,6 +20,8 @@ function Navi({handleLogOut, user}) {
     )
   }
 
+  console.log(useLocation().pathname)
+
 
   return (<div className='navi'>
     <Navbar className='navi' style={{paddingBottom: '5rem'}} bg="light" expand="lg">
@@ -25,12 +30,12 @@ function Navi({handleLogOut, user}) {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link className='navlinks' href="/">Home</Nav.Link>
-            <Nav.Link className='navlinks' href="/shoepage">Shoes</Nav.Link>
-          <Nav.Link className='navlinks' href="/shop">Shop</Nav.Link>
-          <Nav.Link className='navlinks' href='/userpage'>Users</Nav.Link>
-          <Navbar.Text className='navlinks' style={{textAlign: 'right'}}>
-            Signed in as: <a href="/login">{user ? user.username : <>Please Sign In</>}</a>
+            <Nav.Link className={useLocation().pathname === '/' ? 'navlinks-active': 'navlinks' } href="/">Home</Nav.Link>
+            <Nav.Link className={useLocation().pathname === '/shoepage' ? 'navlinks-active': 'navlinks' } href="/shoepage">Shoes</Nav.Link>
+          <Nav.Link className={useLocation().pathname === '/shop' ? 'navlinks-active': 'navlinks' } href="/shop">Shop</Nav.Link>
+          <Nav.Link className={useLocation().pathname === '/userpage' ? 'navlinks-active': 'navlinks' } href='/userpage'>Users</Nav.Link>
+          <Navbar.Text className='navlinks' style={{textAlign: 'right', paddingLeft: '2rem'}}>
+            Signed in as: <a href="/login">{user ? <span className='navlinks-active'>{user.username}</span> : <>Please Sign In</>}</a>
           </Navbar.Text>
           </Nav>
         </Navbar.Collapse>

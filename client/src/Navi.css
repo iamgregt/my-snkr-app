@@ -42,6 +42,18 @@
         font-weight: 400;
     }
     
+    .navlinks-active{
+        letter-spacing: 0.17;
+        line-height: 17px;
+        min-height: 22px;
+        white-space: nowrap;
+        font-size: 25px;
+        font-family: "HelveticaNeue-Regular" ;
+        color: rgba(239, 200, 98, 1);
+        font-style: normal;
+        font-weight: 400;
+    }
+    
     h1{
         color: rgba(255, 255, 255, 1);
         font-family: "HelveticaNeue-Bold";
