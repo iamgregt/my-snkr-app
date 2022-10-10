@@ -68,7 +68,7 @@ function App() {
     <Routes>
       <Route path="/shoepage" element={<Shoe users={users} handleUpdate={handleUpdateShoeForm} user={user} />} />
       <Route path="/" element={<HomePage />} />
-      <Route path="/shop" element={<Shopping user={user} />} />
+      <Route path="/stores" element={<Shopping user={user} />} />
       <Route path="/deleted" element={<ShoeDeletedPage />} />
       <Route path="/userpage" element={<UserPage users={users} />} />
     </Routes>

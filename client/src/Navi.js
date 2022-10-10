@@ -32,7 +32,7 @@ function Navi({handleLogOut, user}) {
           <Nav className="me-auto">
             <Nav.Link className={useLocation().pathname === '/' ? 'navlinks-active': 'navlinks' } href="/">Home</Nav.Link>
             <Nav.Link className={useLocation().pathname === '/shoepage' ? 'navlinks-active': 'navlinks' } href="/shoepage">Shoes</Nav.Link>
-          <Nav.Link className={useLocation().pathname === '/shop' ? 'navlinks-active': 'navlinks' } href="/shop">Shop</Nav.Link>
+          <Nav.Link className={useLocation().pathname === '/stores' ? 'navlinks-active': 'navlinks' } href="/stores">Stores</Nav.Link>
           <Nav.Link className={useLocation().pathname === '/userpage' ? 'navlinks-active': 'navlinks' } href='/userpage'>Users</Nav.Link>
           <Navbar.Text className='navlinks' style={{textAlign: 'right', paddingLeft: '2rem'}}>
             Signed in as: <a href="/login">{user ? <span className='navlinks-active'>{user.username}</span> : <>Please Sign In</>}</a>

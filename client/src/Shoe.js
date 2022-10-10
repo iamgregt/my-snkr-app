@@ -22,16 +22,10 @@ function Shoe({ deleteShoe, users, user}) {
   const [shoeList, setShoeList] = useState([])
   const [imageList, setImageList] = useState([])
   const [addShoe, setAddShoe] = useState(false)
-  const [picid, setPicid] = useState(null)
 
   const navigate = useNavigate()
 
   
-  const getShoes = () => {
-    let arr = [...shoeList]
-
-  }
-
 
 
 
@@ -60,7 +54,6 @@ function Shoe({ deleteShoe, users, user}) {
 
     const [show, setShow] = useState(false);
     const [update, setUpdate] = useState(false)
-    const [shoesLoaded, setShoesLoaded] = useState(false)
 
     const imageListRef = ref(storage, "SneakerImages/")
 
@@ -84,20 +77,6 @@ function Shoe({ deleteShoe, users, user}) {
     }, [])
 
     
-
-    // useEffect(() => {
-    //   listAll(imageListRef)
-    //   .then(r => {
-    //     r.items.forEach((item) => {
-    //       // getTheData(item)
-    //       getDownloadURL(item).then((url) => {
-    //         setImageList((prev) => [...prev, url])
-    //       } )
-    //     })
-    //   })
-      
-    // }, [])
-
     function renderShoe(newShoe){
       console.log(newShoe)
       console.log(shoeList)
@@ -123,9 +102,7 @@ function Shoe({ deleteShoe, users, user}) {
         console.log(shoe)
       }).catch((error) => {
     console.log(error)
-    // setShoeList(imageList.filter((i) => {
-    //   return i !== s.firebase
-    // }))
+
     setImageList(imageList.filter((i) => {
       return i !== s.firebase
     }))
@@ -156,9 +133,6 @@ function Shoe({ deleteShoe, users, user}) {
         <>
         <h1>You do not have any shoes.</h1>
         <NewShoe setShoeList={setShoeList} user={user} setImageList={setImageList} renderShoe={renderShoe} addShoe={addShoe} setAddShoe={setAddShoe} />
-        {/* <Spinner animation="border" role="status">
-      <span className="visually-hidden">Loading...</span>
-    </Spinner> */}
         </>
       )
     }
@@ -178,11 +152,6 @@ function Shoe({ deleteShoe, users, user}) {
             <CardGroup>
            
        {user ? usrList.filter((s) => s.user.id === user.id).map((s) => {
-            // console.log(s)
-            let shoeDescription = ""
-            const shoeJson = myJson.find(d => d.name == s.brand)
-            shoeJson ? shoeDescription = shoeJson.description : shoeDescription = "no desc"
-            console.log(s.store)
 
             return(
         <div key={s.id}>
@@ -194,7 +163,6 @@ function Shoe({ deleteShoe, users, user}) {
       <ListGroup className="list-group-flush">
         <ListGroup.Item>Shoe Size: {s.size}</ListGroup.Item>
         <ListGroup.Item>Store: {s.store.name}</ListGroup.Item>
-        <ListGroup.Item>{shoeDescription}</ListGroup.Item>
         <ListGroup.Item>{s.for_sale ? <>This is For Sale</> : <>Not For Sale</>}</ListGroup.Item>
       </ListGroup>
       <Card.Body>

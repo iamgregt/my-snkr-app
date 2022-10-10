@@ -42,12 +42,14 @@ function HomePage(){
           transition: {
             delayChildren: 0
           }
-        }
+        },
+        exit: {opacity: 0, transition: {duration: 2}}
       }
 
       const homepic = {
         hidden: {opacity: 0, y: 200, scale: 0},
-        show: {scale: 1, opacity: 1, y: 0, transition: {duration: 4}}
+        show: {scale: 1, opacity: 1, y: 0, transition: {duration: 3}}
+        
       }
 
     return(
