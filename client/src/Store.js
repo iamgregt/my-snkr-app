@@ -2,7 +2,8 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 
 
-function Store({stores}){
+
+function Store({stores, user}){
 
   function handleSubmit(e){
     e.preventDefault()

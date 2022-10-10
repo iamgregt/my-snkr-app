@@ -63,7 +63,10 @@ function Login({onLogin}) {
         },
         body: JSON.stringify(user)
       })
-        .then(r => r.json()).then(user => onLogin(user))
+        .then(r => r.json()).then(user => {
+          navigate('/')
+          onLogin(user)
+        })
     
     }
 

@@ -2,9 +2,11 @@ import './HomePage.css'
 import {motion} from "framer-motion/dist/framer-motion"
 import { useState } from 'react'
 import shoepic from './assets/shoepic.png'
+import Login from './Login';
 
 
-function HomePage(){
+
+function HomePage({setUser, user}){
 
 
     const [rotate, setRotate] = useState(false)
@@ -51,6 +53,9 @@ function HomePage(){
         show: {scale: 1, opacity: 1, y: 0, transition: {duration: 3}}
         
       }
+
+
+  if(!user) return <Login onLogin={setUser} />
 
     return(
         <div className='homepage'>

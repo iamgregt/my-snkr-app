@@ -1,6 +1,5 @@
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css"
-import Login from './Login';
 import { useEffect, useState } from 'react';
 import Shopping from './Shopping';
 import Shoe from './Shoe';
@@ -57,7 +56,6 @@ function App() {
     console.log(e)
   }
 
-  if(!user) return <Login onLogin={setUser} />
 
 
 
@@ -67,10 +65,10 @@ function App() {
     <Navi handleLogOut={(handleLogOut)} user={user} />
     <Routes>
       <Route path="/shoepage" element={<Shoe users={users} handleUpdate={handleUpdateShoeForm} user={user} />} />
-      <Route path="/" element={<HomePage />} />
-      <Route path="/stores" element={<Shopping user={user} />} />
+      <Route path="/" element={<HomePage setUser={setUser} user={user} />} />
+      <Route path="/stores" element={<Shopping user={user} setUser={setUser} />} />
       <Route path="/deleted" element={<ShoeDeletedPage />} />
-      <Route path="/userpage" element={<UserPage users={users} />} />
+      <Route path="/userpage" element={<UserPage users={users} user={user} setUser={setUser} />} />
     </Routes>
 </div>
   );

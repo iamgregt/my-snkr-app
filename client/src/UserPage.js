@@ -1,10 +1,11 @@
 import { useState } from "react"
 import Button  from "react-bootstrap/Button"
 import Store from "./Store"
+import Login from "./Login"
 
 
 
-function UserPage({users}){
+function UserPage({users, user, setUser}){
 
     const [storeList, setStoreList] = useState([])
 
@@ -21,7 +22,7 @@ function UserPage({users}){
         })
     }
 
-
+    if(!user) return <Login onLogin={setUser} />
 
     return(
         <>

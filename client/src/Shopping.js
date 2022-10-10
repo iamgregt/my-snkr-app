@@ -1,7 +1,8 @@
 import {useEffect, useState} from 'react'
 import Store from './Store'
+import Login from './Login'
 
-function Shopping({user}){
+function Shopping({user, setUser}){
   const [stores, setStores] = useState([])
 
 
@@ -13,7 +14,7 @@ function Shopping({user}){
       setStores(s)})
   }, [])
 
-    
+  if(!user) return <Login onLogin={setUser} />
 
 
     return(
