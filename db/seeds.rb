@@ -33,13 +33,16 @@ User.create(
 )
 
 Store.create(
-    name: "Finish Line"
+    name: "Finish Line",
+    logo: "https://i.postimg.cc/h4x8vswy/finishline.png"
 )
 
 Store.create(
-    name: "Hibbett Sports"
+    name: "Hibbett Sports",
+    logo: "https://i.postimg.cc/gkjZRKBb/hibbett.png"
 )
 
 Store.create(
-    name: "Footlocker"
+    name: "Footlocker",
+    logo: "https://i.postimg.cc/JhM73r4H/footloacker.png"
 )

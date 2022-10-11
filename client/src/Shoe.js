@@ -9,7 +9,6 @@ import CardGroup from 'react-bootstrap/CardGroup'
 import NewShoe from "./NewShoe";
 import { storage } from './firebase';
 import { ref, listAll, getDownloadURL, getMetadata, deleteObject } from 'firebase/storage';
-import { async } from "@firebase/util";
 import {useNavigate} from "react-router-dom"
 import Spinner from "react-bootstrap/Spinner"
 

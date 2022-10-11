@@ -7,9 +7,19 @@
     url("https://fonts.animaapp.com/HelveticaNeue-Bold") format ("opentype");
     }
 
+
+.storeCard{
+    padding-bottom: 1.5rem;
+}
+
+
     h1, h2, h3{
         color: black;
         font-family: "HelveticaNeue-Bold";
         padding-bottom: 0.6rem;
     }
+
+.storepic{
+    padding-right: 1.5rem;
+}
     

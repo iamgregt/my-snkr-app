@@ -1,9 +1,14 @@
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
+import Card from 'react-bootstrap/Card'
+import CardGroup from 'react-bootstrap/CardGroup'
+import './Store.css'
+import finishline from './assets/finishline.png'
+import logohere from './assets/logo-here.png'
 
 
 
-function Store({stores, user}){
+function Store({stores, setStores}){
 
   function handleSubmit(e){
     e.preventDefault()
@@ -18,7 +23,11 @@ function Store({stores, user}){
         "Content-Type": "application/json"
       },
       body: JSON.stringify(newStore)
-    }).then(r => r.json()).then(data => console.log(data))
+    }).then(r => r.json())
+    .then(data => {
+      console.log(data)
+      setStores(prev => [...prev, newStore])
+    })
   }
 
 
@@ -35,23 +44,24 @@ function Store({stores, user}){
         Submit
       </Button>
     </Form>
+    <CardGroup>
         {stores.map((s) => {
             console.log(s)
-            return(<>
-                <h2>{s.name}</h2>
-                <h3>Users That Have Shoes From Here</h3>
-                <ul>
-                  {s.users.map((u) => {
-                    console.log(u)
-                    return (
-                    
-                    <li>{u.username}</li>
-        )})}
-                </ul>
-
+            return(<>                    
+            <div key={s.id} className="storeCard">
+            
+            <Card id={s.id} data-cardid={s.id} style={{ width: '18rem' }}>
+            <Card.Img className='storepic' variant="top" src={s.logo ? s.logo : "https://i.postimg.cc/LsxDkVMd/logohere.png" } />
+            <Card.Body>
+                  <Card.Title>{s.name}</Card.Title>
+                  </Card.Body>
+            </Card>
+            
+            </div>
                 </>
             )
         })}
+        </CardGroup>
         </>
     )
 }
