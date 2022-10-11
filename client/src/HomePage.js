@@ -70,7 +70,8 @@ function HomePage({setUser, user}){
       <motion.li key={index} className="item" variants={item} />
     ))}
   </motion.ul> */}
-        <motion.ul variants={container2}
+       <div className='container1'>
+       <motion.ul variants={container2}
     initial="hidden"
     animate="visible">
        <a href='/shoepage'>
@@ -80,6 +81,7 @@ function HomePage({setUser, user}){
   <motion.img whileHover={{scale: 1.2}} variants={item} src={"https://firebasestorage.googleapis.com/v0/b/mysnkrapp.appspot.com/o/SneakerImages%2Fjordan_1_blacktoe.png4c20b559-73dd-4fdb-b285-a6f07267456b?alt=media&token=d45b5997-ee89-49e2-b8a6-ccef1733691e"} />
        </a>
         </motion.ul>
+       </div>
         <motion.div variants={homepicContainer} initial="hidden" animate="show" className='homepic-container'>
         <motion.img variants={homepic} className='homepic' src={shoepic} />
         </motion.div>

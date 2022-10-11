@@ -5,6 +5,7 @@ import { uuidv4 } from "@firebase/util"
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import {useNavigate} from "react-router-dom"
+import './NewShoe.css'
 
 
 
@@ -25,7 +26,7 @@ function NewShoe({user, setImageList, renderShoe, addShoe, setAddShoe, setShoeLi
     
     function newShoeForm() {
             return(
-                <>
+                <div>
                
                 <h2>Got a new pair?</h2>
                 <h3>Go ahead and add them to your closet!</h3>
@@ -47,9 +48,6 @@ function NewShoe({user, setImageList, renderShoe, addShoe, setAddShoe, setShoeLi
       <option value="Addidas">Addidas</option>
     </Form.Select>
     {isJordan ? <><Form.Control type="number" placeholder="Which Release?" /></>: null}
-                  <Form.Text className="text-muted">
-                    Jordan, Nike, Puma, Addidas...whatcha got?!
-                  </Form.Text>
                 </Form.Group>
           
                 <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -67,7 +65,7 @@ function NewShoe({user, setImageList, renderShoe, addShoe, setAddShoe, setShoeLi
                   Submit
                 </Button>
               </Form>
-              </>
+              </div>
             )
         }
     

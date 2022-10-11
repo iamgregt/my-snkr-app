@@ -1,0 +1,15 @@
+@font-face {
+    font-family:
+    "HelveticaNeue-Bold";
+    font-style: normal;
+    font-weight: 700;
+    src:
+    url("https://fonts.animaapp.com/HelveticaNeue-Bold") format ("opentype");
+    }
+
+    h1, h2, h3{
+        color: rgba(255, 255, 255, 1);
+        font-family: "HelveticaNeue-Bold";
+        padding-bottom: 0.6rem;
+    }
+    

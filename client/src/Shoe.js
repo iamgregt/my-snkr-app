@@ -4,7 +4,7 @@ import Modal from 'react-bootstrap/Modal'
 import DonateShoe from "./DonateShoe";
 import Card from 'react-bootstrap/Card'
 import ListGroup from 'react-bootstrap/ListGroup'
-import myJson from './assets/shoeDescriptions.json'
+import './Shoe.css'
 import CardGroup from 'react-bootstrap/CardGroup'
 import NewShoe from "./NewShoe";
 import { storage } from './firebase';
