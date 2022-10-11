@@ -55,6 +55,12 @@ function Store({stores, setStores}){
             <Card.Body>
                   <Card.Title>{s.name}</Card.Title>
                   </Card.Body>
+                  <Card.Body>
+                  <Card.Title>{s.summary}</Card.Title>
+                  </Card.Body>
+                  <Card.Body>
+                  <Card.Title>{s.summary2}</Card.Title>
+                  </Card.Body>
             </Card>
             
             </div>
