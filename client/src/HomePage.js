@@ -6,7 +6,7 @@ import Login from './Login';
 
 
 
-function HomePage(){
+function HomePage({user, setUser}){
 
 
     const [rotate, setRotate] = useState(false)
@@ -61,7 +61,7 @@ function HomePage(){
       }
 
 
-
+      if(!user) return <Login onLogin={setUser} />
 
     return(
       <div className='homepage'>  
@@ -69,7 +69,7 @@ function HomePage(){
         animate="animate"
         exit="exit"
         variants={pageMotion}>
-      <motion.h1 animate={{rotate: rotate ? 360 : 0}} transition={{type: "tween", duration: 5}} onClick={() => setRotate(!rotate)}>Welome to MySneakers</motion.h1>
+      {/* <motion.h1 animate={{rotate: rotate ? 360 : 0}} transition={{type: "tween", duration: 5}} onClick={() => setRotate(!rotate)}>Welome to MySneakers</motion.h1> */}
       {/* <motion.ul
 className="container2"
 variants={container2}
