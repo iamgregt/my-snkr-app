@@ -6,7 +6,7 @@ import Login from './Login';
 
 
 
-function HomePage({setUser, user}){
+function HomePage(){
 
 
     const [rotate, setRotate] = useState(false)
@@ -55,7 +55,7 @@ function HomePage({setUser, user}){
       }
 
 
-  if(!user) return <Login onLogin={setUser} />
+
 
     return(
         <div className='homepage'>

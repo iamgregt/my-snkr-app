@@ -11,7 +11,7 @@ import { storage } from './firebase';
 import { ref, listAll, getDownloadURL, getMetadata, deleteObject } from 'firebase/storage';
 import { async } from "@firebase/util";
 import {useNavigate} from "react-router-dom"
-// import Spinner from "react-bootstrap/Spinner"
+import Spinner from "react-bootstrap/Spinner"
 
 
 
@@ -22,6 +22,7 @@ function Shoe({ deleteShoe, users, user}) {
   const [shoeList, setShoeList] = useState([])
   const [imageList, setImageList] = useState([])
   const [addShoe, setAddShoe] = useState(false)
+  const [isLoading, setLoading] = useState(true)
 
   const navigate = useNavigate()
 
@@ -71,6 +72,8 @@ function Shoe({ deleteShoe, users, user}) {
           // getTheData(item)
           getDownloadURL(item).then((url) => {
             setImageList((prev) => [...prev, url])
+            setLoading(false)
+            console.log('loaded')
           } )
         })
       })
@@ -127,16 +130,26 @@ function Shoe({ deleteShoe, users, user}) {
 
     console.log(shoeList.length)
 
+  
     
-    while(shoeList.length === 0 ){
-      return(
-        <>
-        <h1>You do not have any shoes.</h1>
-        <NewShoe setShoeList={setShoeList} user={user} setImageList={setImageList} renderShoe={renderShoe} addShoe={addShoe} setAddShoe={setAddShoe} />
-        </>
-      )
-    }
+      // while(shoeList.length === 0 ){
+      //   console.log(shoeList.length)
 
+  
+      
+
+      //   return(
+      //     <>
+      //     <h1>You do not have any shoes.</h1>
+      //     <NewShoe setShoeList={setShoeList} user={user} setImageList={setImageList} renderShoe={renderShoe} addShoe={addShoe} setAddShoe={setAddShoe} />
+      //     </>
+      //   )
+      // }
+
+    if(isLoading){
+      console.log('loading')
+      return <Spinner animation="grow" variant="light" />
+    }
     if(shoeList.length > 0 && user){
     console.log("loading")
     console.log(shoeList)
@@ -199,6 +212,13 @@ function Shoe({ deleteShoe, users, user}) {
         </>
 
     )}
+            return(
+          <>
+          <h1>You do not have any shoes.</h1>
+          <NewShoe setShoeList={setShoeList} user={user} setImageList={setImageList} renderShoe={renderShoe} addShoe={addShoe} setAddShoe={setAddShoe} />
+          </>
+        )
+
       }
     //   else{
     //     return(

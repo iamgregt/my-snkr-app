@@ -9,6 +9,8 @@ import HomePage from './HomePage';
 import ShoeDeletedPage from './ShoeDeletedPage';
 import {useNavigate} from "react-router-dom"
 import UserPage from './UserPage';
+import {Spinner} from 'react-bootstrap/Spinner'
+import Login from './Login';
 
 
 
@@ -55,6 +57,14 @@ function App() {
     e.preventDefault(e)
     console.log(e)
   }
+
+//  setTimeout(() =>{
+//   if(!user) return <Login onLogin={setUser} />
+
+//  }, 3000 )
+
+
+
 
 
 
