@@ -1,16 +1,13 @@
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css"
 import { useEffect, useState } from 'react';
-import Shopping from './Shopping';
-import Shoe from './Shoe';
 import Navi from './Navi';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import HomePage from './HomePage';
-import ShoeDeletedPage from './ShoeDeletedPage';
 import {useNavigate} from "react-router-dom"
 import UserPage from './UserPage';
 import {Spinner} from 'react-bootstrap/Spinner'
 import Login from './Login';
+import AnimatedRoutes from './AnimatedRoutes';
 
 
 
@@ -73,13 +70,7 @@ function App() {
   return (
     <div className='App'>
     <Navi handleLogOut={(handleLogOut)} user={user} />
-    <Routes>
-      <Route path="/shoepage" element={<Shoe users={users} handleUpdate={handleUpdateShoeForm} user={user} />} />
-      <Route path="/" element={<HomePage setUser={setUser} user={user} />} />
-      <Route path="/stores" element={<Shopping user={user} setUser={setUser} />} />
-      <Route path="/deleted" element={<ShoeDeletedPage />} />
-      <Route path="/userpage" element={<UserPage users={users} user={user} setUser={setUser} />} />
-    </Routes>
+    <AnimatedRoutes user={user} setUser={setUser} users={users} handleUpdateShoeForm={handleUpdateShoeForm} />
 </div>
   );
 }
