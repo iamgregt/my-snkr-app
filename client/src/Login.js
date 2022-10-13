@@ -1,6 +1,7 @@
 import React, { useEffect } from "react"
 import {useState} from "react"
 import {useNavigate} from "react-router-dom"
+import './Login.css'
 
 
 function Login({onLogin}) {
@@ -8,6 +9,7 @@ function Login({onLogin}) {
     const [authMode, setAuthMode] = useState("signin")
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [errors, setErrors] = useState([])
     
     const navigate = useNavigate()
 
@@ -63,10 +65,21 @@ function Login({onLogin}) {
         },
         body: JSON.stringify(user)
       })
-        .then(r => r.json()).then(user => {
-          navigate('/')
-          onLogin(user)
-        })
+        .then(res => {
+          if(res.ok){
+            res.json().then(user => {
+              navigate('/')
+              console.log(user)
+              onLogin(user)
+            })
+          }{
+            res.json().then(errorData => {
+              setErrors(errorData.error)
+              setUsername('')
+              setPassword('')
+            })
+          }
+        } )
     
     }
 
@@ -79,14 +92,20 @@ function Login({onLogin}) {
               <div className="Auth-form-content">
                 <h3 className="Auth-form-title">Sign In</h3>
                 <div className="text-center">
-                  Not registered yet?{" "}
+                  <span className="nry">Not registered yet?{" "}</span>
                   <span className="link-primary" onClick={changeAuthMode}>
                     <a href="#">Sign Up</a>
                   </span>
+                  {errors[0] && 
+                  <div class="error-message">
+                  <h4 class="error-text">{errors}</h4>
+                </div>
+                }
                 </div>
                 <div className="form-group mt-3">
                   <label>Username</label>
                   <input
+                  required
                    value={username}
                    onChange={(e) => setUsername(e.target.value)}                
                     type="text"
@@ -97,6 +116,7 @@ function Login({onLogin}) {
                 <div className="form-group mt-3">
                   <label>Password</label>
                   <input
+                  required
                     value={password}
                     onChange={e => setPassword(e.target.value)}
                     type="password"
@@ -138,7 +158,7 @@ function Login({onLogin}) {
             required
               type="text"
               className="form-control mt-1"
-              placeholder="First Name"
+              placeholder="username"
             />
                <label>password</label>
             <input

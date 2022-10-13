@@ -18,10 +18,6 @@ class StoresController < ApplicationController
         render json: Store.create(store_params)
     end
 
-    # def store_with_shoes
-    #     stores = 
-        
-    # end
 
     private
 
