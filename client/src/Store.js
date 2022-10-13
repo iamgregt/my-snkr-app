@@ -3,9 +3,6 @@ import Form from 'react-bootstrap/Form'
 import Card from 'react-bootstrap/Card'
 import CardGroup from 'react-bootstrap/CardGroup'
 import './Store.css'
-import finishline from './assets/finishline.png'
-import logohere from './assets/logo-here.png'
-
 
 
 function Store({stores, setStores}){
@@ -47,10 +44,10 @@ function Store({stores, setStores}){
     <CardGroup>
         {stores.map((s) => {
             console.log(s)
-            return(<>                    
+            return(                   
             <div key={s.id} className="storeCard">
             
-            <Card id={s.id} data-cardid={s.id} style={{ width: '18rem' }}>
+            <Card style={{ width: '18rem' }}>
             <Card.Img className='storepic' variant="top" src={s.logo ? s.logo : "https://i.postimg.cc/LsxDkVMd/logohere.png" } />
             <Card.Body>
                   <Card.Title>{s.name}</Card.Title>
@@ -64,7 +61,7 @@ function Store({stores, setStores}){
             </Card>
             
             </div>
-                </>
+              
             )
         })}
         </CardGroup>

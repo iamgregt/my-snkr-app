@@ -2,11 +2,7 @@ import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css"
 import { useEffect, useState } from 'react';
 import Navi from './Navi';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import {useNavigate} from "react-router-dom"
-import UserPage from './UserPage';
-import {Spinner} from 'react-bootstrap/Spinner'
-import Login from './Login';
 import AnimatedRoutes from './AnimatedRoutes';
 
 
@@ -25,6 +21,11 @@ function App() {
         r.json().then((user) => setUser(user))
         console.log('cool')  
         console.log(user)
+      }else{
+        setTimeout(() => {
+          console.log('not signed in')
+          navigate('/')
+        }, 2000)
       }
     })
   }, [])

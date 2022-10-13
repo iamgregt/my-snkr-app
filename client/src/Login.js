@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React from "react"
 import {useState} from "react"
 import {useNavigate} from "react-router-dom"
 import './Login.css'
@@ -72,7 +72,7 @@ function Login({onLogin}) {
               console.log(user)
               onLogin(user)
             })
-          }{
+          }else{
             res.json().then(errorData => {
               setErrors(errorData.error)
               setUsername('')
