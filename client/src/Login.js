@@ -47,6 +47,7 @@ function Login({onLogin}) {
       .then(res => res.json()).then(data => {
         console.log(data)
         clearState()
+        setErrors(["Welcome! Please sign in"])
       })
     }
 
@@ -97,8 +98,8 @@ function Login({onLogin}) {
                     <a href="#">Sign Up</a>
                   </span>
                   {errors[0] && 
-                  <div class="error-message">
-                  <h4 class="error-text">{errors}</h4>
+                  <div className="error-message">
+                  <h4 className="error-text">{errors}</h4>
                 </div>
                 }
                 </div>
